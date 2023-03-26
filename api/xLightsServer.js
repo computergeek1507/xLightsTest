@@ -5,7 +5,7 @@ const xLightsServer = axios.create({
 });
 
 export const getVersion = async (callback) => {
-    const response = await OWMServer.get(
+    const response = await xLightsServer.get(
         `/getVersion`
         );
         console.log("received: ", response);
