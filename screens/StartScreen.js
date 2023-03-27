@@ -14,8 +14,11 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { Feather } from "@expo/vector-icons";
 
+import { getVersion } from '../api/xLightsServer';
+
 const StartScreen = ({ route, navigation }) => {
 
+    const [xLightsVersion, setxLightsVersion] = useState("");
     useEffect(() => {
         navigation.setOptions({
           headerRight: () => (
@@ -32,13 +35,17 @@ const StartScreen = ({ route, navigation }) => {
         });
       });
 
+      useEffect(() => {
+
+        getVersion((data) => {
+          //console.log("setting state with: ", items);
+          setxLightsVersion(data);
+        });
+      }, []);
 
 return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
-
-
-
         <View>
           <Button
             style={styles.buttons}
@@ -51,11 +58,15 @@ return (
         <View>
           <Button
             style={styles.buttons}
-            title="Clear"
-           
+            title="Models"
+            onPress={() =>
+                 navigation.navigate("Models")
+            }
           />
         </View>
-        
+        <View>
+        <Text>{xLightsVersion}</Text>
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
