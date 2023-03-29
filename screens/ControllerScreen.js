@@ -33,6 +33,17 @@ const ControllerScreen = ({ route, navigation }) => {
         });
         });
 
+        const renderSeparator = ({ index, item }) => {
+            return (
+                <View
+                    style={{
+                        backgroundColor: 'black',
+                        height: 0.5,
+                    }}
+                />
+            );
+            };
+
         const renderController = ({ index, item }) => {
             //console.log("setting controller ", item);
             return (
@@ -40,20 +51,29 @@ const ControllerScreen = ({ route, navigation }) => {
                 <TouchableHighlight onPress={() => {
                     navigation.navigate("Controller Info", { item });
                     }}>
-                <View style={styles.button}>
+                        <View >
+                <View style={styles.controllerButton}>
                     <Text style={styles.mainLabelText}>Name: {item.name}</Text>
                     <Text style={styles.mainLabelText}>IP: {item.ip}</Text>
                     <Text style={styles.mainLabelText}>Protocol: {item.protocol}</Text>
+                    
+                </View>
+                <View>
                     <Text style={styles.subLabelText}>{item.vendor} {item.model} {item.variant}</Text>
+                    </View>
                 </View>
                 </TouchableHighlight>
             );
             };
 
+            
+
+
     return (
         <FlatList
         data={controllers}
         //keyExtractor={item => item.name}
+        ItemSeparatorComponent={renderSeparator}
         renderItem={renderController}
       />
     );
@@ -65,6 +85,11 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontWeight: "bold",
       },
+      controllerButton: {
+        flexDirection: 'row',
+        color: "#fff",
+        fontWeight: "bold",
+      },
       mainLabelText: {
           fontSize: 12,
         padding: 2,
@@ -72,7 +97,8 @@ const styles = StyleSheet.create({
       subLabelText: {
         color: "#808080",
         fontSize: 10,
-        textAlign: 'left'
+        textAlign: 'left',
+        padding: 2,
       },
 });
 
