@@ -14,11 +14,12 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { Feather } from "@expo/vector-icons";
 
-import { getVersion } from '../api/xLightsServer';
+import { getVersion, getShowFolder} from '../api/xLightsServer';
 
 const StartScreen = ({ route, navigation }) => {
 
     const [xLightsVersion, setxLightsVersion] = useState("");
+    const [showFolder, setShowFolder] = useState("");
     useEffect(() => {
         navigation.setOptions({
           headerRight: () => (
@@ -40,6 +41,10 @@ const StartScreen = ({ route, navigation }) => {
         getVersion((data) => {
           //console.log("setting state with: ", items);
           setxLightsVersion(data);
+        });
+        getShowFolder((data) => {
+          //console.log("setting state with: ", data);
+          setShowFolder(data);
         });
       }, []);
 
@@ -65,7 +70,8 @@ return (
           />
         </View>
         <View>
-        <Text>{xLightsVersion}</Text>
+        <Text>Show Folder: {showFolder}</Text>
+        <Text>xLights Version: {xLightsVersion}</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>

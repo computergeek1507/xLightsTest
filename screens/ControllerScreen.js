@@ -9,9 +9,18 @@ import {
 
 import React, {useEffect,useState} from "react";
 
+import { getControllers} from '../api/xLightsServer';
+
 const ControllerScreen = ({ route, navigation }) => {
-    //const { history } = route.params;
-    //console.log("setting history with: ", route.params);
+    const [controllers, setControllers] = useState([]);
+
+    useEffect(() => {
+
+        getControllers((data) => {
+            //console.log("setting state with: ", data);
+            setControllers(data);
+          });
+      }, []);
 
 
     useEffect(() => {
@@ -24,9 +33,29 @@ const ControllerScreen = ({ route, navigation }) => {
         });
         });
 
+        const renderController = ({ index, item }) => {
+            //console.log("setting controller ", item);
+            return (
+                
+                <TouchableHighlight onPress={() => {
+                    navigation.navigate("Controller Info", { item });
+                    }}>
+                <View style={styles.button}>
+                    <Text style={styles.mainLabelText}>Name: {item.name}</Text>
+                    <Text style={styles.mainLabelText}>IP: {item.ip}</Text>
+                    <Text style={styles.mainLabelText}>Protocol: {item.protocol}</Text>
+                    <Text style={styles.subLabelText}>{item.vendor} {item.model} {item.variant}</Text>
+                </View>
+                </TouchableHighlight>
+            );
+            };
+
     return (
-        <View>
-            </View>
+        <FlatList
+        data={controllers}
+        //keyExtractor={item => item.name}
+        renderItem={renderController}
+      />
     );
 
 };
@@ -36,14 +65,14 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontWeight: "bold",
       },
-      historyLabelText: {
-          fontSize: 16,
+      mainLabelText: {
+          fontSize: 12,
         padding: 2,
       },
-      timeLabelText: {
+      subLabelText: {
         color: "#808080",
-        fontSize: 8,
-        textAlign: 'right'
+        fontSize: 10,
+        textAlign: 'left'
       },
 });
 

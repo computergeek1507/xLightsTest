@@ -9,6 +9,7 @@ import {
 import StartScreen from "./screens/StartScreen";
 import ModelScreen from "./screens/ModelScreen";
 import ControllerScreen from "./screens/ControllerScreen";
+import ControllerInfoScreen from "./screens/ControllerInfoScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -22,6 +23,7 @@ export default function App() {
         <Stack.Screen name="Start Screen" component={StartScreen} />
         <Stack.Screen name="Models" component={ModelScreen} />
         <Stack.Screen name="Controllers" component={ControllerScreen} />
+        <Stack.Screen name="Controller Info" component={ControllerInfoScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

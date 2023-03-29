@@ -8,15 +8,23 @@ export const getVersion = async (callback) => {
     const response = await xLightsServer.get(
         `/getVersion`
         );
-        console.log("received: ", response.data);
+        //console.log("received: ", response.data);
         callback(response.data);  
       };
 
+export const getShowFolder = async (callback) => {
+        const response = await xLightsServer.get(
+            `/getShowFolder`
+            );
+            //console.log("received: ", response.data);
+            callback(response.data);  
+          };
+
 export const getControllers = async (callback) => {
 const response = await xLightsServer.get(
-    `/getControllerIPs`
+    `/getControllers`
     );
-    console.log("received: ", response.data);
+    //console.log("received: ", response.data);
     callback(response.data);  
     };
 
@@ -27,5 +35,16 @@ export const getModels = async (callback) => {
         console.log("received: ", response.data);
         callback(response.data);  
         };
+
+export const uploadController = async (values, callback) => {
+    console.log("sent: ", values);
+    const response = await xLightsServer.get(
+        `/uploadController?ip=${values}`
+        );
+        console.log("received: ", response.data);
+        callback(response.data);  
+        };
+
+        
 
 export default xLightsServer;
