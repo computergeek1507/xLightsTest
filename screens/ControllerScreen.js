@@ -72,7 +72,7 @@ const ControllerScreen = ({ route, navigation }) => {
     return (
         <FlatList
         data={controllers}
-        //keyExtractor={item => item.name}
+        keyExtractor={item => item.name}
         ItemSeparatorComponent={renderSeparator}
         renderItem={renderController}
       />

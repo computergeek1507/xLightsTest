@@ -46,7 +46,11 @@ return (
         <Text>Vendor: {controllerData.vendor}</Text>
         <Text>Model: {controllerData.model}</Text>
         <Text>Type: {controllerData.type}</Text>
+        <Text>ID: {controllerData.id}</Text>
+        <Text>Start Channel: {controllerData.startchannel}</Text>
+        <Text>Channels: {controllerData.channels}</Text>
         <Text>Protocol: {controllerData.protocol}</Text>
+        <Text>Active: {controllerData.active}</Text>
         </View>
         <View>
           <Button

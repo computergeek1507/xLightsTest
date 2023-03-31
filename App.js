@@ -10,6 +10,7 @@ import StartScreen from "./screens/StartScreen";
 import ModelScreen from "./screens/ModelScreen";
 import ControllerScreen from "./screens/ControllerScreen";
 import ControllerInfoScreen from "./screens/ControllerInfoScreen";
+import ModelInfoScreen from "./screens/ModelInfoScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -24,6 +25,7 @@ export default function App() {
         <Stack.Screen name="Models" component={ModelScreen} />
         <Stack.Screen name="Controllers" component={ControllerScreen} />
         <Stack.Screen name="Controller Info" component={ControllerInfoScreen} />
+        <Stack.Screen name="Model Info" component={ModelInfoScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -31,7 +33,7 @@ export default function App() {
 
 const navStyling = {
   headerStyle: {
-    backgroundColor: "#0065A4",
+    backgroundColor: "#a40000",
   },
   headerTintColor: "#fff",
   headerTitleStyle: {

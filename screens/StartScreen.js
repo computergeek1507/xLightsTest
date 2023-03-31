@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     padding: 10,
+    color:"red"
   },
   inputError: {
     color: "red",
