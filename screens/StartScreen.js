@@ -23,8 +23,7 @@ const StartScreen = ({ route, navigation }) => {
     useEffect(() => {
         navigation.setOptions({
           headerRight: () => (
-            <TouchableOpacity
-                          >
+            <TouchableOpacity>
               <Feather
                 style={{ marginRight: 10 }}
                 name="settings"
@@ -51,23 +50,23 @@ const StartScreen = ({ route, navigation }) => {
 return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
-        <View>
-          <Button
-            style={styles.buttons}
-            title="Controllers"
-            onPress={() =>
-                 navigation.navigate("Controllers")
-            }
-          />
+        <View style={styles.countContainer}>
+        <TouchableOpacity style={styles.button} onPress={() =>
+                 navigation.navigate("Controllers")}>
+            <Text style={styles.buttonText}>Controllers</Text>
+        </TouchableOpacity>
         </View>
-        <View>
-          <Button
-            style={styles.buttons}
-            title="Models"
-            onPress={() =>
-                 navigation.navigate("Models")
-            }
-          />
+        <View style={styles.countContainer}>
+          <TouchableOpacity style={styles.button} onPress={() =>
+                  navigation.navigate("Models")}>
+              <Text style={styles.buttonText}>Models</Text>
+          </TouchableOpacity>          
+        </View>
+        <View style={styles.countContainer}>
+          <TouchableOpacity style={styles.button} onPress={() =>
+                  navigation.navigate("Testing")}>
+              <Text style={styles.buttonText}>Testing</Text>
+          </TouchableOpacity>          
         </View>
         <View>
         <Text>Show Folder: {showFolder}</Text>
@@ -84,9 +83,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#E8EAF6",
     flex: 1,
   },
-  buttons: {
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#a40000',
     padding: 10,
-    color:"red"
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  countContainer: {
+    //alignItems: 'center',
+    padding: 10,
   },
   inputError: {
     color: "red",

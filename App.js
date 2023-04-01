@@ -11,6 +11,8 @@ import ModelScreen from "./screens/ModelScreen";
 import ControllerScreen from "./screens/ControllerScreen";
 import ControllerInfoScreen from "./screens/ControllerInfoScreen";
 import ModelInfoScreen from "./screens/ModelInfoScreen";
+import TestingScreen from "./screens/TestingScreen";
+import ControllerModelScreen from "./screens/ControllerModelScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -26,6 +28,8 @@ export default function App() {
         <Stack.Screen name="Controllers" component={ControllerScreen} />
         <Stack.Screen name="Controller Info" component={ControllerInfoScreen} />
         <Stack.Screen name="Model Info" component={ModelInfoScreen} />
+        <Stack.Screen name="Controller Model" component={ControllerModelScreen} />
+        <Stack.Screen name="Testing" component={TestingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
