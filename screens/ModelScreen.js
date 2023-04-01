@@ -47,14 +47,13 @@ const ModelScreen = ({ route, navigation }) => {
             };
 
         const renderModels = ({ index, item }) => {
-            console.log("setting Models ", item);
             return (
                 
                 <TouchableHighlight onPress={() => {
                     navigation.navigate("Model Info", { item });
                     }}>
                 <View style={styles.controllerButton}>
-                    <Text style={styles.mainLabelText}>Name: {item}</Text>                    
+                    <Text style={styles.mainLabelText}>{item}</Text>                    
                 </View>
                 </TouchableHighlight>
             );
