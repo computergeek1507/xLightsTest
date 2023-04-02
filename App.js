@@ -28,7 +28,7 @@ export default function App() {
         <Stack.Screen name="Controllers" component={ControllerScreen} />
         <Stack.Screen name="Controller Info" component={ControllerInfoScreen} />
         <Stack.Screen name="Model Info" component={ModelInfoScreen} />
-        <Stack.Screen name="Controller Model" component={ControllerModelScreen} />
+        <Stack.Screen name="Controller Models" component={ControllerModelScreen} />
         <Stack.Screen name="Testing" component={TestingScreen} />
       </Stack.Navigator>
     </NavigationContainer>

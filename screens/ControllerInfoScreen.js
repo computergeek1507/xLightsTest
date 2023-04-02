@@ -77,15 +77,24 @@ return (
             <Text style={styles.resultsLabelText}>Active:</Text>
             <Text style={styles.resultsLabelText}>{controllerData.active.toString()}</Text>
         </View>
+        <View style={styles.resultsRow}>
+            <Text style={styles.resultsLabelText}>Managed:</Text>
+            <Text style={styles.resultsLabelText}>{controllerData.managed.toString()}</Text>
+        </View>
         </View>
         <View style={styles.countContainer}>
-          <TouchableOpacity style={styles.button} onPress={() =>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Controller Models", { controllerData })}>
+              <Text style={styles.buttonText}>Visualize</Text>
+          </TouchableOpacity>          
+        </View>
+        <View style={styles.countContainer}>
+          <TouchableOpacity style={styles.button} disabled={true} onPress={() =>
                   uploadController(controllerData.ip)}>
               <Text style={styles.buttonText}>Upload Outputs</Text>
           </TouchableOpacity>          
         </View>
         <View style={styles.countContainer}>
-        <TouchableOpacity style={styles.button} onPress={() =>
+        <TouchableOpacity style={styles.button} disabled={true} onPress={() =>
                   Linking.openURL(`http:\\${controllerData.ip}`)}>
               <Text style={styles.buttonText}>Open Controller</Text>
           </TouchableOpacity>          

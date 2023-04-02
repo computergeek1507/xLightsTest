@@ -28,6 +28,14 @@ const response = await xLightsServer.get(
     callback(response.data);  
     };
 
+export const getModelsOnController = async (values, callback) => {
+    const response = await xLightsServer.get(
+        `/getControllerPortMap?ip=${values}`
+        );
+        //console.log("received: ", response.data);
+        callback(response.data);  
+        };
+
 export const getModels = async (callback) => {
     const response = await xLightsServer.get(
         `/getModels`
