@@ -23,7 +23,7 @@ const StartScreen = ({ route, navigation }) => {
     useEffect(() => {
         navigation.setOptions({
           headerRight: () => (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
               <Feather
                 style={{ marginRight: 10 }}
                 name="settings"

@@ -14,8 +14,6 @@ import { getModels} from '../api/xLightsServer';
 const TestingScreen = ({ route, navigation }) => {
     //const { history } = route.params;
     //console.log("setting history with: ", route.params);
-
-
     useEffect(() => {
         navigation.setOptions({
             headerLeft: () => (
@@ -24,9 +22,7 @@ const TestingScreen = ({ route, navigation }) => {
             </TouchableOpacity>
             ),
         });
-        });    
-
-
+        });
     return (
        <View>
         </View>
