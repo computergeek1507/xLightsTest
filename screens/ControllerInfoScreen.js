@@ -1,13 +1,10 @@
 import { Button, Input } from '@rneui/themed';
 import {
-  Keyboard,
-  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
-  Image,
 } from "react-native";
 
 import * as Linking from 'expo-linking';
@@ -15,12 +12,11 @@ import * as Linking from 'expo-linking';
 import React, { useEffect, useRef, useState } from "react";
 
 import { uploadController} from '../api/xLightsServer';
-import Toast from 'react-native-root-toast';
 
 const ControllerInfoScreen = ({ route, navigation }) => {
 
     const controllerData = route.params.item;
-    console.log("setting controller data ", controllerData);
+    //console.log("setting controller data ", controllerData);
 
     useEffect(() => {
         navigation.setOptions({

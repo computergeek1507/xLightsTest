@@ -17,7 +17,6 @@ const ControllerScreen = ({ route, navigation }) => {
     useEffect(() => {
 
         getControllers((data) => {
-            //console.log("setting state with: ", data);
             setControllers(data);
           });
       }, []);
@@ -45,7 +44,6 @@ const ControllerScreen = ({ route, navigation }) => {
             };
 
         const renderController = ({ index, item }) => {
-            //console.log("setting controller ", item);
             return (
                 
                 <TouchableHighlight onPress={() => {
@@ -64,11 +62,7 @@ const ControllerScreen = ({ route, navigation }) => {
                 </View>
                 </TouchableHighlight>
             );
-            };
-
-            
-
-
+            };      
     return (
         <FlatList
         data={controllers}
@@ -77,7 +71,6 @@ const ControllerScreen = ({ route, navigation }) => {
         renderItem={renderController}
       />
     );
-
 };
 
 const styles = StyleSheet.create({

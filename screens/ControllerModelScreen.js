@@ -1,14 +1,10 @@
 import { Button, Input } from '@rneui/themed';
 import {
   FlatList,
-  Keyboard,
-  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
-  Image,
 } from "react-native";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -24,9 +20,6 @@ const ControllerModelScreen = ({ route, navigation }) => {
 
   console.log("setting controller data ", controllerInfo);
 
-
-
-  //getModelsOnController
   useEffect(() => {
     navigation.setOptions({
         headerLeft: () => (
@@ -34,13 +27,17 @@ const ControllerModelScreen = ({ route, navigation }) => {
             <Text style={styles.headerButton}>Controller</Text>
         </TouchableOpacity>
         ),
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate("Controllers")}>
+              <Text style={styles.headerButton}>Controllers</Text>
+          </TouchableOpacity>
+          ),
     });
     });
 
     useEffect(() => {
 
       getModelsOnController(controllerInfo.ip, (data) => {
-          console.log("setting model with: ", data);
           setModels(data);
         });
     }, []);
@@ -57,41 +54,73 @@ const ControllerModelScreen = ({ route, navigation }) => {
       };
 
   const renderPixelPort = ({ index, item }) => {
-      //console.log("setting controller ", item);
       return (
-          
-
-          <View style={styles.resultsRow} >
-              <Text>Pixel Port {item.port}</Text>
-              <Text>Pixels: {item.pixels}</Text>
-              <Text>Start Channel: {item.startchannel}</Text>
-              
+          <View  style={styles.resultsRow} >
+              <Text>Pixel Port {item.port}: </Text>  
+                            <FlatList
+                  data={item.models}
+                  renderItem={renderModels}
+             />
           </View>
-
       );
       };
-      const renderModels = ({ index, item }) => {
-        //console.log("setting controller ", item);
+      const renderSerialPort = ({ index, item }) => {
         return (
-            
-  
-            <View style={styles.resultsRow} >
-                <Text>Pixel Port {item.port}</Text>
-                <Text>Pixels: {item.pixels}</Text>
-                <Text>Start Channel: {item.startchannel}</Text>
-                
+            <View  style={styles.resultsRow} >
+                <Text>Serial Port {item.port}: </Text>  
+                              <FlatList
+                    data={item.models}
+                    renderItem={renderModels}
+               />
             </View>
-  
+        );
+        };
+
+        const renderMatrix = ({ index, item }) => {
+          return (
+              <View  style={styles.resultsRow} >
+                  <Text>Matrix Port {item.port}: </Text>  
+                                <FlatList
+                      data={item.models}
+                      renderItem={renderModels}
+                 />
+              </View>
+          );
+          };
+    const renderModels = ({ index, item }) => {
+        return (            
+            <View >
+                <Text>{item.name} {item.smartremote}</Text>               
+            </View>  
         );
         };
 
     return (
+      <View >
       <FlatList
       data={models.pixelports}
       //keyExtractor={item => item.name}
       ItemSeparatorComponent={renderSeparator}
       renderItem={renderPixelPort}
     />
+    <FlatList
+      data={models.serialports}
+      //keyExtractor={item => item.name}
+      ItemSeparatorComponent={renderSeparator}
+      renderItem={renderSerialPort}
+    />
+    <FlatList
+      data={models.ledpanelmatrixports}
+      //keyExtractor={item => item.name}
+      ItemSeparatorComponent={renderSeparator}
+      renderItem={renderMatrix}
+    /><FlatList
+    data={models.virtualmatrixports}
+    //keyExtractor={item => item.name}
+    ItemSeparatorComponent={renderSeparator}
+    renderItem={renderMatrix}
+  />
+    </View>  
   );
 
 };
