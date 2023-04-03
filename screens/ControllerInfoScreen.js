@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  Pressable,
 } from "react-native";
 
 import * as Linking from 'expo-linking';
@@ -32,6 +33,9 @@ const ControllerInfoScreen = ({ route, navigation }) => {
             ),
         });
     });    
+
+    const uploadDisabled = () => !controllerData.managed;
+    const openDisabled = () => controllerData.type !== 'Ethernet';
 
 return (
     <TouchableWithoutFeedback>
@@ -78,19 +82,24 @@ return (
             <Text style={styles.resultsLabelText}>{controllerData.managed.toString()}</Text>
         </View>
         </View>
-        <View style={styles.countContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Controller Models", { controllerData })}>
+        <View style={styles.touch}>
+        <TouchableOpacity style={styles.button} 
+            onPress={() => navigation.navigate("Controller Models", { controllerData })}>
               <Text style={styles.buttonText}>Visualize</Text>
           </TouchableOpacity>          
         </View>
-        <View style={styles.countContainer}>
-          <TouchableOpacity style={styles.button} disabled={true} onPress={() =>
+        <View style={styles.touch}>
+          <TouchableOpacity style={uploadDisabled() ? styles.buttonDisable :styles.button} 
+           disabled={uploadDisabled()} 
+           onPress={() =>
                   uploadController(controllerData.ip)}>
               <Text style={styles.buttonText}>Upload Outputs</Text>
           </TouchableOpacity>          
         </View>
-        <View style={styles.countContainer}>
-        <TouchableOpacity style={styles.button} disabled={true} onPress={() =>
+        <View style={styles.touch}>
+        <TouchableOpacity style={openDisabled() ? styles.buttonDisable :styles.button} 
+             disabled={openDisabled()} 
+             onPress={() =>
                   Linking.openURL(`http:\\${controllerData.ip}`)}>
               <Text style={styles.buttonText}>Open Controller</Text>
           </TouchableOpacity>          
@@ -106,6 +115,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#E8EAF6",
     flex: 1,
   },
+  buttonDisable: {
+    alignItems: 'center',
+    backgroundColor: '#a40000',
+    padding: 10,
+    opacity: 0.4
+  },
   button: {
     alignItems: 'center',
     backgroundColor: '#a40000',
@@ -115,7 +130,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
   },
-  countContainer: {
+  touch: {
     //alignItems: 'center',
     padding: 10,
   },
