@@ -44,6 +44,14 @@ export const getModels = async (callback) => {
         callback(response.data);  
         };
 
+export const getModel = async (values, callback) => {
+    const response = await xLightsServer.get(
+        `/getModel?model=${values}`
+        );
+        //console.log("received: ", response.data);
+        callback(response.data);  
+        };
+
 export const uploadController = async (values, callback) => {
     console.log("sent: ", values);
     const response = await xLightsServer.get(

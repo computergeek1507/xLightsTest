@@ -9,16 +9,26 @@ import {
     View
 } from "react-native";
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import React, {useEffect,useState} from "react";
 
 
 const SettingScreen = ({ route, navigation }) => {
     //const { history } = route.params;
     //console.log("setting history with: ", route.params);
+    const [ipAddress, setIPAddress] = useState("127.0.0.1");
+    const [port, setPort] = useState("49913");
+
     useEffect(() => {
         navigation.setOptions({
             headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
+            <TouchableOpacity onPress={() => 
+                {
+                    storeData('ip', ipAddress);
+                    storeData('port', port);
+                navigation.navigate("Start Screen")
+                }}>
                 <Text style={styles.headerButton}>Save</Text>
             </TouchableOpacity>
             ),
@@ -29,6 +39,35 @@ const SettingScreen = ({ route, navigation }) => {
                 ),
         });
         });
+
+        useEffect(() => {
+            getData("ip",(data) => {
+                setIPAddress(data);
+              });
+              getData("port",(data) => {
+                setPort(data);
+              }); 
+          }, []);
+
+        const storeData = async (key,value) => {
+            try {
+                await AsyncStorage.setItem(`@${key}`, value)
+            } catch (e) {
+              // saving error
+            }
+          }
+          const getData = async (key, callback) => {
+            try {
+              const value = await AsyncStorage.getItem(`@${key}`)
+              if(value !== null) {
+                // value previously stored
+                callback(value);  
+              }
+            } catch(e) {
+              // error reading value
+            }
+          }
+
     return (
        <View>
         <View style={styles.textHeader}>
@@ -37,15 +76,16 @@ const SettingScreen = ({ route, navigation }) => {
         <Input
           style={styles.input}
           placeholder="IP"
+          value = {ipAddress}
           autoCorrect={false}
-          //onChangeText={(val) => updateStateObject({ lon2: val })}
+          onChangeText={(val) => setIPAddress(val)}
         />
         <Input
           style={styles.input}
           placeholder="Port"
-
+          value = {port}
           autoCorrect={false}
-          //onChangeText={(val) => updateStateObject({ lon2: val })}
+          onChangeText={(val) => setPort(val)}
         />
         </View>
     );
