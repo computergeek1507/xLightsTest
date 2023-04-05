@@ -1,5 +1,6 @@
 import { Button, Input } from '@rneui/themed';
 import {
+  FlatList,
   Keyboard,
   Platform,
   StyleSheet,
@@ -13,12 +14,15 @@ import {
 
 import React, { useEffect, useRef, useState } from "react";
 
+import { getModel} from '../api/xLightsServer';
+
 import Toast from 'react-native-root-toast';
 
 const ModelInfoScreen = ({ route, navigation }) => {
 
     const modelData = route.params.item;
-    console.log("setting model data ", modelData);
+    const [modelParm, setModelParm] = useState([]);
+    //console.log("setting model data ", modelData);
 
     useEffect(() => {
         navigation.setOptions({
@@ -35,6 +39,14 @@ const ModelInfoScreen = ({ route, navigation }) => {
         });
     });
 
+    useEffect(() => {
+
+      getModel(modelData, (data) => {
+        setModelParm(data);
+        console.log("setting data ", data);
+        });
+    }, []);
+
     
 
 return (
@@ -42,6 +54,24 @@ return (
       <View style={styles.container}>
       <View>
         <Text>Name: {modelData}</Text>
+        </View>
+        <View>
+        <Text>Type: {modelParm.DisplayAs}</Text>
+        </View>
+        <View>
+        <Text>StartChannel: {modelParm.StartChannel}</Text>
+        </View>
+        <View>
+        <Text>LayoutGroup: {modelParm.LayoutGroup}</Text>
+        </View>
+        <View>
+        <Text>Controller: {modelParm.Controller}</Text>
+        </View>
+        <View>
+        <Text>Controller Port: {modelParm.ControllerConnection?.Port}</Text>
+        </View>
+        <View>
+        <Text>Controller Protocol: {modelParm.ControllerConnection?.Protocol}</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -60,6 +90,25 @@ const styles = StyleSheet.create({
   headerButton: {
     color: "#fff",
     fontWeight: "bold",
+  },
+  resultsGrid: {
+    borderColor: "#000",
+    borderWidth: 1,
+  },
+  resultsRow: {
+    flexDirection: "row",
+    borderColor: "#000",
+    borderBottomWidth: 1,
+  },
+  resultsLabelContainer: {
+    borderRightWidth: 1,
+    borderRightColor: "#000",
+    flex: 1,
+  },
+  resultsLabelText: {
+    //fontWeight: "bold",
+    fontSize: 14,
+    padding: 5,
   },
 
 });

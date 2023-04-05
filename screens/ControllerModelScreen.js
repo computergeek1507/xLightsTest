@@ -18,7 +18,7 @@ const ControllerModelScreen = ({ route, navigation }) => {
 
   const [models, setModels] = useState([]);
 
-  console.log("setting controller data ", controllerInfo);
+  //console.log("setting controller data ", controllerInfo);
 
   useEffect(() => {
     navigation.setOptions({
