@@ -16,11 +16,20 @@ import { Feather } from "@expo/vector-icons";
 
 import { getVersion, getShowFolder} from '../api/xLightsServer';
 
+import {
+  initSavedDB,
+  setupPrintListener,
+  storePrintItem,
+  deletePrintData
+} from "../helpers/fb-saved";
+
 const StartScreen = ({ route, navigation }) => {
 
     const [xLightsVersion, setxLightsVersion] = useState("");
     const [showFolder, setShowFolder] = useState("");
     const [offline, setOffline] = useState(true);
+    const [printData, setPrintData] = useState([]);
+
     useEffect(() => {
         navigation.setOptions({
           headerRight: () => (
@@ -53,13 +62,22 @@ const StartScreen = ({ route, navigation }) => {
     };
 
       useEffect(() => {
+        try {
+          initSavedDB();
+        } catch (err) {
+          console.log(err);
+        }
+        setupPrintListener((items) => {
+          //console.log("setting state with: ", items);
+          setPrintData(items);
+        });
         loadData();
       }, []);
 
       useEffect(() => {
         //console.log("route.params ", route.params);
         //if (route?.params?.ip) {
-          console.log("route.params ", route.params);
+          //console.log("route.params ", route.params);
           loadData();
         //}
       }, [route.params]);
@@ -84,11 +102,10 @@ return (
           </TouchableOpacity>          
         </View>
         <View style={styles.countContainer}>
-          <TouchableOpacity style={offline ? styles.buttonDisable :styles.button} 
-             disabled={offline} 
+          <TouchableOpacity style={styles.button} 
            onPress={() =>
-                  navigation.navigate("Testing")}>
-              <Text style={styles.buttonText}>Testing</Text>
+                  navigation.navigate("Saved Controller",{printData})}>
+              <Text style={styles.buttonText}>Saved Controller</Text>
           </TouchableOpacity>          
         </View>
         <View>

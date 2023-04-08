@@ -12,6 +12,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { getModelsOnController} from '../api/xLightsServer';
 import Toast from 'react-native-root-toast';
 
+import { AntDesign } from '@expo/vector-icons'; 
+
+import {
+  storePrintItem
+} from "../helpers/fb-saved";
+
 const ControllerModelScreen = ({ route, navigation }) => {
 
   const controllerInfo = route.params.controllerData;
@@ -24,14 +30,19 @@ const ControllerModelScreen = ({ route, navigation }) => {
     navigation.setOptions({
         headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.navigate("Controller Info",{"item":controllerInfo})}>
-            <Text style={styles.headerButton}>Controller</Text>
+            <AntDesign name="back" size={24} padding={10} color="white" />
         </TouchableOpacity>
         ),
         headerRight: () => (
-          <TouchableOpacity onPress={() => navigation.navigate("Controllers")}>
-              <Text style={styles.headerButton}>Controllers</Text>
+          <TouchableOpacity onPress={() => storePrintItem({name :controllerInfo.ip,models:models})}>
+              <AntDesign name="addfile" size={24} color="white" />
           </TouchableOpacity>
           ),
+        //headerRight: () => (
+        //  <TouchableOpacity onPress={() => navigation.navigate("Controllers")}>
+        //      <Text style={styles.headerButton}>Controllers</Text>
+        //  </TouchableOpacity>
+         // ),
     });
     });
 

@@ -8,8 +8,9 @@ import {
 } from "react-native";
 
 import React, {useEffect,useState} from "react";
-
+import { AntDesign } from '@expo/vector-icons'; 
 import { getModels} from '../api/xLightsServer';
+
 
 const ModelScreen = ({ route, navigation }) => {
     //const { history } = route.params;
@@ -28,7 +29,7 @@ const ModelScreen = ({ route, navigation }) => {
         navigation.setOptions({
             headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
-                <Text style={styles.headerButton}>Main Screen</Text>
+                <AntDesign name="back" size={24} padding={10} color="white" />
             </TouchableOpacity>
             ),
         });

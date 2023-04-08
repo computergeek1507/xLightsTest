@@ -10,6 +10,8 @@ import {
 
 import * as Linking from 'expo-linking';
 
+import { AntDesign } from '@expo/vector-icons'; 
+
 import React, { useEffect, useRef, useState } from "react";
 
 import { uploadController} from '../api/xLightsServer';
@@ -23,12 +25,12 @@ const ControllerInfoScreen = ({ route, navigation }) => {
         navigation.setOptions({
             headerLeft: () => (
                 <TouchableOpacity onPress={() => navigation.navigate("Controllers")}>
-                    <Text style={styles.headerButton}>Controllers</Text>
+                    <AntDesign name="back" size={24} padding={10} color="white" />
                 </TouchableOpacity>
                 ),
             headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
-                <Text style={styles.headerButton}>Main Screen</Text>
+                <AntDesign name="home" size={24} padding={10} color="white" />
             </TouchableOpacity>
             ),
         });

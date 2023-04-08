@@ -9,6 +9,8 @@ import {
 
 import React, {useEffect,useState} from "react";
 
+import { AntDesign } from '@expo/vector-icons'; 
+
 import { getControllers} from '../api/xLightsServer';
 
 const ControllerScreen = ({ route, navigation }) => {
@@ -26,7 +28,7 @@ const ControllerScreen = ({ route, navigation }) => {
         navigation.setOptions({
             headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
-                <Text style={styles.headerButton}>Main Screen</Text>
+                <AntDesign name="back" size={24} padding={10} color="white" />
             </TouchableOpacity>
             ),
         });

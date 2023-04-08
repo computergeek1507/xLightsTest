@@ -14,6 +14,8 @@ import {
 
 import React, { useEffect, useRef, useState } from "react";
 
+import { AntDesign } from '@expo/vector-icons'; 
+
 import { getModel } from '../api/xLightsServer';
 import ModelDisplay from '../components/ModelDisplay';
 import ModelGroupDisplay from '../components/ModelGroupDisplay';
@@ -30,12 +32,12 @@ const ModelInfoScreen = ({ route, navigation }) => {
         navigation.setOptions({
             headerLeft: () => (
                 <TouchableOpacity onPress={() => navigation.navigate("Models")}>
-                    <Text style={styles.headerButton}>Models</Text>
+                    <AntDesign name="back" size={24} padding={10} color="white" />
                 </TouchableOpacity>
                 ),
             headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
-                <Text style={styles.headerButton}>Main Screen</Text>
+                <AntDesign name="home" size={24} padding={10} color="white" />
             </TouchableOpacity>
             ),
         });

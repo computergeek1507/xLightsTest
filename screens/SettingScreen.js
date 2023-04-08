@@ -13,6 +13,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import React, {useEffect,useState} from "react";
 
+import { AntDesign } from '@expo/vector-icons'; 
+
 const SettingScreen = ({ route, navigation }) => {
     //const { history } = route.params;
     //console.log("setting history with: ", route.params);
@@ -28,12 +30,12 @@ const SettingScreen = ({ route, navigation }) => {
                     storeData('port', port);
                   navigation.navigate("Start Screen",{ip: ipAddress})
                 }}>
-                <Text style={styles.headerButton}>Save</Text>
+                <AntDesign name="check" padding={10} size={24} color="white" />
             </TouchableOpacity>
             ),
             headerRight: () => (
                 <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
-                    <Text style={styles.headerButton}>Back</Text>
+                    <AntDesign name="close" padding={10} size={24} color="white" />
                 </TouchableOpacity>
                 ),
         });
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
     },
     input: {
         padding: 2,
-        fontSize: 12,
+        fontSize: 18,
     },
     headerButton: {
         color: "#fff",

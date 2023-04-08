@@ -13,6 +13,7 @@ import ControllerInfoScreen from "./screens/ControllerInfoScreen";
 import ModelInfoScreen from "./screens/ModelInfoScreen";
 import TestingScreen from "./screens/TestingScreen";
 import ControllerModelScreen from "./screens/ControllerModelScreen";
+import SavedControllerModelScreen from "./screens/SavedControllerModelScreen";
 import SettingScreen from "./screens/SettingScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
@@ -30,7 +31,8 @@ export default function App() {
         <Stack.Screen name="Controller Info" component={ControllerInfoScreen} />
         <Stack.Screen name="Model Info" component={ModelInfoScreen} />
         <Stack.Screen name="Controller Models" component={ControllerModelScreen} />
-        <Stack.Screen name="Testing" component={TestingScreen} />
+        <Stack.Screen name="Saved Controller Models" component={SavedControllerModelScreen} />
+        <Stack.Screen name="Saved Controller" component={TestingScreen} />
         <Stack.Screen name="Settings" component={SettingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
