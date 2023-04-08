@@ -14,7 +14,9 @@ import {
 
 import React, { useEffect, useRef, useState } from "react";
 
-import { getModel} from '../api/xLightsServer';
+import { getModel } from '../api/xLightsServer';
+import ModelDisplay from '../components/ModelDisplay';
+import ModelGroupDisplay from '../components/ModelGroupDisplay';
 
 import Toast from 'react-native-root-toast';
 
@@ -47,32 +49,14 @@ const ModelInfoScreen = ({ route, navigation }) => {
         });
     }, []);
 
-    
-
 return (
     <TouchableWithoutFeedback>
+     
       <View style={styles.container}>
-      <View>
-        <Text>Name: {modelData}</Text>
-        </View>
-        <View>
-        <Text>Type: {modelParm.DisplayAs}</Text>
-        </View>
-        <View>
-        <Text>StartChannel: {modelParm.StartChannel}</Text>
-        </View>
-        <View>
-        <Text>LayoutGroup: {modelParm.LayoutGroup}</Text>
-        </View>
-        <View>
-        <Text>Controller: {modelParm.Controller}</Text>
-        </View>
-        <View>
-        <Text>Controller Port: {modelParm.ControllerConnection?.Port}</Text>
-        </View>
-        <View>
-        <Text>Controller Protocol: {modelParm.ControllerConnection?.Protocol}</Text>
-        </View>
+      {modelParm.models == null
+        ? <ModelDisplay model = {modelParm}/>
+        : <ModelGroupDisplay model = {modelParm}/>
+      }
       </View>
     </TouchableWithoutFeedback>
   );
