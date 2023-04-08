@@ -13,7 +13,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import React, {useEffect,useState} from "react";
 
-
 const SettingScreen = ({ route, navigation }) => {
     //const { history } = route.params;
     //console.log("setting history with: ", route.params);
@@ -27,7 +26,7 @@ const SettingScreen = ({ route, navigation }) => {
                 {
                     storeData('ip', ipAddress);
                     storeData('port', port);
-                navigation.navigate("Start Screen")
+                  navigation.navigate("Start Screen",{ip: ipAddress})
                 }}>
                 <Text style={styles.headerButton}>Save</Text>
             </TouchableOpacity>

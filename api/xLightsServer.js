@@ -1,8 +1,22 @@
 import axios from "axios";
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const xLightsServer = axios.create({
-    baseURL: 'http://127.0.0.1:49913',
+   baseURL: `http://127.0.0.1:49913`,
 });
+
+export async  function getBaseUrl() {
+    const ip = await AsyncStorage.getItem('@ip');
+    const port = await AsyncStorage.getItem('@port');
+    var url = `http://${ip}:${port}`;
+    return url;
+  }
+
+  xLightsServer.interceptors.request.use( async config => { 
+    config.baseURL=await getBaseUrl(); 
+    return config; 
+}, error => Promise.reject(error) );
 
 export const getVersion = async (callback, failcallback) => {
     try {

@@ -36,20 +36,33 @@ const StartScreen = ({ route, navigation }) => {
         });
       });
 
-      useEffect(() => {
-
+      const loadData = () => {
         getVersion((data) => {
           setOffline(false);
           //console.log("setting state with: ", items);
           setxLightsVersion(data);
         },(data) => {
           setOffline(true);
+          setxLightsVersion("");
+          setShowFolder("");
         });
         getShowFolder((data) => {
           //console.log("setting state with: ", data);
           setShowFolder(data);
         });
+    };
+
+      useEffect(() => {
+        loadData();
       }, []);
+
+      useEffect(() => {
+        //console.log("route.params ", route.params);
+        //if (route?.params?.ip) {
+          console.log("route.params ", route.params);
+          loadData();
+        //}
+      }, [route.params]);
 
 return (
     <TouchableWithoutFeedback>
