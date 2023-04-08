@@ -20,6 +20,7 @@ const StartScreen = ({ route, navigation }) => {
 
     const [xLightsVersion, setxLightsVersion] = useState("");
     const [showFolder, setShowFolder] = useState("");
+    const [offline, setOffline] = useState(true);
     useEffect(() => {
         navigation.setOptions({
           headerRight: () => (
@@ -38,8 +39,11 @@ const StartScreen = ({ route, navigation }) => {
       useEffect(() => {
 
         getVersion((data) => {
+          setOffline(false);
           //console.log("setting state with: ", items);
           setxLightsVersion(data);
+        },(data) => {
+          setOffline(true);
         });
         getShowFolder((data) => {
           //console.log("setting state with: ", data);
@@ -51,24 +55,33 @@ return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
         <View style={styles.countContainer}>
-        <TouchableOpacity style={styles.button} onPress={() =>
+        <TouchableOpacity style={offline ? styles.buttonDisable :styles.button} 
+             disabled={offline} 
+        onPress={() =>
                  navigation.navigate("Controllers")}>
             <Text style={styles.buttonText}>Controllers</Text>
         </TouchableOpacity>
         </View>
         <View style={styles.countContainer}>
-          <TouchableOpacity style={styles.button} onPress={() =>
+          <TouchableOpacity style={offline ? styles.buttonDisable :styles.button} 
+             disabled={offline} 
+          onPress={() =>
                   navigation.navigate("Models")}>
               <Text style={styles.buttonText}>Models</Text>
           </TouchableOpacity>          
         </View>
         <View style={styles.countContainer}>
-          <TouchableOpacity style={styles.button} onPress={() =>
+          <TouchableOpacity style={offline ? styles.buttonDisable :styles.button} 
+             disabled={offline} 
+           onPress={() =>
                   navigation.navigate("Testing")}>
               <Text style={styles.buttonText}>Testing</Text>
           </TouchableOpacity>          
         </View>
         <View>
+        { offline && 
+  <Text style={styles.inputError}>Failed to Connect to xLights, Check IP Address Settings</Text>
+}
         <Text>Show Folder: {showFolder}</Text>
         <Text>xLights Version: {xLightsVersion}</Text>
         </View>
@@ -87,6 +100,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#a40000',
     padding: 10,
+  },
+  buttonDisable: {
+    alignItems: 'center',
+    backgroundColor: '#a40000',
+    padding: 10,
+    opacity: 0.4
   },
   buttonText: {
     color: "#fff",

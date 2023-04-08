@@ -4,21 +4,29 @@ const xLightsServer = axios.create({
     baseURL: 'http://127.0.0.1:49913',
 });
 
-export const getVersion = async (callback) => {
+export const getVersion = async (callback, failcallback) => {
+    try {
     const response = await xLightsServer.get(
         `/getVersion`
         );
         //console.log("received: ", response.data);
         callback(response.data);  
-      };
+    } catch (err) {
+        failcallback(err)
+    }
+};
 
 export const getShowFolder = async (callback) => {
+    try {
         const response = await xLightsServer.get(
             `/getShowFolder`
             );
             //console.log("received: ", response.data);
             callback(response.data);  
-          };
+        } catch (err) {
+
+        }
+ };
 
 export const getControllers = async (callback) => {
 const response = await xLightsServer.get(

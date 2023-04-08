@@ -30,21 +30,21 @@ const ModelGroupDisplay = ( {model } ) => {
 return (
 <View>
       <View>
-        <Text>Name: {model.name}</Text>
+      <Text style={styles.resultsGrid}>Name: {model.name}</Text>
         </View>       
         <View>
-        <Text>LayoutGroup: {model.LayoutGroup}</Text>
+        <Text style={styles.resultsGrid}>LayoutGroup: {model.LayoutGroup}</Text>
         </View>
         <View>
-        <Text>Layout: {model.layout}</Text>
+        <Text style={styles.resultsGrid}>Layout: {model.layout}</Text>
         </View>
         <View>
-        <Text>Models:</Text>
+        <Text style={styles.resultsGrid}>Models:</Text>
         </View>
-        <FlatList
+        <FlatList style={styles.resultsGrid}
       data={model.models.split(',')}
       //keyExtractor={item => item.name}
-     // ItemSeparatorComponent={renderSeparator}
+      ItemSeparatorComponent={renderSeparator}
       renderItem={renderModel}
     />
         </View>
