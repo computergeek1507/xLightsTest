@@ -41,10 +41,15 @@ const navStyling = {
   headerStyle: {
     backgroundColor: "#a40000",
   },
+  headerLayoutPreset : 'center',
   headerTintColor: "#fff",
   headerTitleStyle: {
     fontWeight: "bold",
+    justifyContent: 'center',
   },
+  headerTitleContainerStyle:{
+    justifyContent:"center",
+    }
 };
 
 const styles = StyleSheet.create({
@@ -52,6 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     margin: 20,
     flex: 1,
+    alignItems: "center"
   },
 });
 

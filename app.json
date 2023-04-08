@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "xLightsTest",
-    "slug": "xLightsTest",
+    "slug": "xlightstest",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,16 +15,24 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.computergeek1507.xlightstest"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.computergeek1507.xlightstest"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a9edab8a-fa09-437b-bf73-3ae4f6b30d79"
+      }
+    },
+    "owner": "computergeek1507"
   }
 }

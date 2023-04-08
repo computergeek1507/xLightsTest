@@ -64,10 +64,12 @@ const styles = StyleSheet.create({
     resultsGrid: {
       borderColor: "#000",
       borderWidth: 1,
+      padding: 10,
     },
     resultsRow: {
       flexDirection: "row",
       paddingLeft: 20,
+      padding: 10,
      //borderColor: "#000",
       //borderBottomWidth: 1,
     },

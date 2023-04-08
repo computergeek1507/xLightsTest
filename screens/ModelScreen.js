@@ -17,7 +17,6 @@ const ModelScreen = ({ route, navigation }) => {
     const [models, setModels] = useState([]);
 
     useEffect(() => {
-
         getModels((data) => {
             //console.log("setting state with: ", data);
             setModels(data);
@@ -33,35 +32,31 @@ const ModelScreen = ({ route, navigation }) => {
             </TouchableOpacity>
             ),
         });
-        });
+    });
 
-        const renderSeparator = ({ index, item }) => {
-            return (
-                <View
-                    style={{
-                        backgroundColor: 'black',
-                        height: 0.5,
-                    }}
-                />
-            );
-            };
+    const renderSeparator = ({ index, item }) => {
+        return (
+            <View
+                style={{
+                    backgroundColor: 'black',
+                    height: 0.5,
+                }}
+            />
+        );
+    };
 
-        const renderModels = ({ index, item }) => {
-            return (
-                
-                <TouchableHighlight onPress={() => {
-                    navigation.navigate("Model Info", { item });
-                    }}>
-                <View style={styles.controllerButton}>
-                    <Text style={styles.mainLabelText}>{item}</Text>                    
-                </View>
-                </TouchableHighlight>
-            );
-            };
-
+    const renderModels = ({ index, item }) => {
+        return (
             
-
-
+            <TouchableHighlight onPress={() => {
+                navigation.navigate("Model Info", { item });
+                }}>
+            <View style={styles.controllerButton}>
+                <Text style={styles.mainLabelText}>{item}</Text>                    
+            </View>
+            </TouchableHighlight>
+        );
+    };          
     return (
         <FlatList
         data={models}
@@ -86,6 +81,14 @@ const styles = StyleSheet.create({
         color: "#808080",
         fontSize: 8,
         textAlign: 'right'
+      },
+      mainLabelText: {
+        //alignItems: 'center',
+        padding: 10,
+      },
+      mainLabelText: {
+        //alignItems: 'center',
+        padding: 10,
       },
 });
 

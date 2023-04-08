@@ -67,12 +67,14 @@ const styles = StyleSheet.create({
     },
     resultsGrid: {
       borderColor: "#000",
-      borderWidth: 1,
+      borderWidth: 1,    
+      padding: 10,  
     },
     resultsRow: {
-      flexDirection: "row",
-      borderColor: "#000",
-      borderBottomWidth: 1,
+      //flexDirection: "row",
+     // borderColor: "#000",
+      //borderBottomWidth: 1,
+      padding: 10,
     },
     resultsLabelContainer: {
       borderRightWidth: 1,
