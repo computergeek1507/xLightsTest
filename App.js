@@ -32,7 +32,7 @@ export default function App() {
         <Stack.Screen name="Model Info" component={ModelInfoScreen} />
         <Stack.Screen name="Controller Models" component={ControllerModelScreen} />
         <Stack.Screen name="Saved Controller Models" component={SavedControllerModelScreen} />
-        <Stack.Screen name="Saved Controller" component={TestingScreen} />
+        <Stack.Screen name="Saved Wiring Lists" component={TestingScreen} />
         <Stack.Screen name="Settings" component={SettingScreen} />
       </Stack.Navigator>
     </NavigationContainer>

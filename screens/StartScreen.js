@@ -104,8 +104,8 @@ return (
         <View style={styles.countContainer}>
           <TouchableOpacity style={styles.button} 
            onPress={() =>
-                  navigation.navigate("Saved Controller",{printData})}>
-              <Text style={styles.buttonText}>Saved Controller</Text>
+                  navigation.navigate("Saved Wiring Lists",{printData})}>
+              <Text style={styles.buttonText}>Saved Wiring Lists</Text>
           </TouchableOpacity>          
         </View>
         <View>

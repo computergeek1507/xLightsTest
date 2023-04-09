@@ -30,6 +30,7 @@ const ModelInfoScreen = ({ route, navigation }) => {
 
     useEffect(() => {
         navigation.setOptions({
+          title: modelParm.models == null ? "Model Info" : "Model Group Info",
             headerLeft: () => (
                 <TouchableOpacity onPress={() => navigation.navigate("Models")}>
                     <AntDesign name="back" size={24} padding={10} color="white" />
