@@ -33,12 +33,12 @@ const ModelInfoScreen = ({ route, navigation }) => {
           title: modelParm.models == null ? "Model Info" : "Model Group Info",
             headerLeft: () => (
                 <TouchableOpacity onPress={() => navigation.navigate("Models")}>
-                    <AntDesign name="back" size={24} padding={10} color="white" />
+                    <AntDesign name="back" size={36} padding={10} color="white" />
                 </TouchableOpacity>
                 ),
             headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
-                <AntDesign name="home" size={24} padding={10} color="white" />
+                <AntDesign name="home" size={36} padding={10} color="white" />
             </TouchableOpacity>
             ),
         });

@@ -18,7 +18,7 @@ const TestingScreen = ({ route, navigation }) => {
         navigation.setOptions({
             headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
-                <AntDesign name="back" size={24} padding={10} color="white" />
+                <AntDesign name="back" size={36} padding={10} color="white" />
             </TouchableOpacity>
             ),
         });

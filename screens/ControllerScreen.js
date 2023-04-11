@@ -28,7 +28,7 @@ const ControllerScreen = ({ route, navigation }) => {
         navigation.setOptions({
             headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
-                <AntDesign name="back" size={24} padding={10} color="white" />
+                <AntDesign name="back" size={36} padding={10} color="white" />
             </TouchableOpacity>
             ),
         });
@@ -86,14 +86,14 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
       },
       mainLabelText: {
-          fontSize: 12,
-        padding: 2,
+          fontSize: 18,
+        padding: 5,
       },
       subLabelText: {
         color: "#808080",
-        fontSize: 10,
+        fontSize: 12,
         textAlign: 'left',
-        padding: 2,
+        padding: 5,
       },
 });
 

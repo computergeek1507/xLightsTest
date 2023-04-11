@@ -29,7 +29,7 @@ const ModelScreen = ({ route, navigation }) => {
         navigation.setOptions({
             headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
-                <AntDesign name="back" size={24} padding={10} color="white" />
+                <AntDesign name="back" size={36} padding={10} color="white" />
             </TouchableOpacity>
             ),
         });
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
       },
       historyLabelText: {
           fontSize: 16,
-        padding: 2,
+        padding: 4,
       },
       timeLabelText: {
         color: "#808080",

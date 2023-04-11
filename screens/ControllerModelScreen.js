@@ -30,12 +30,12 @@ const ControllerModelScreen = ({ route, navigation }) => {
     navigation.setOptions({
         headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.navigate("Controller Info",{"item":controllerInfo})}>
-            <AntDesign name="back" size={24} padding={10} color="white" />
+            <AntDesign name="back" size={36} padding={10} color="white" />
         </TouchableOpacity>
         ),
         headerRight: () => (
           <TouchableOpacity onPress={() => storePrintItem({name :controllerInfo.ip,models:models})}>
-              <AntDesign name="addfile" size={24} color="white" />
+              <AntDesign name="addfile" size={36} padding={10} color="white" />
           </TouchableOpacity>
           ),
         //headerRight: () => (

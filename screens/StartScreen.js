@@ -37,7 +37,7 @@ const StartScreen = ({ route, navigation }) => {
               <Feather
                 style={{ marginRight: 10 }}
                 name="settings"
-                size={24}
+                size={36}
                 color="#fff"
               />
             </TouchableOpacity>

@@ -30,12 +30,12 @@ const SettingScreen = ({ route, navigation }) => {
                     storeData('port', port);
                   navigation.navigate("Start Screen",{ip: ipAddress})
                 }}>
-                <AntDesign name="check" padding={10} size={24} color="white" />
+                <AntDesign name="check" padding={10} size={36} color="white" />
             </TouchableOpacity>
             ),
             headerRight: () => (
                 <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
-                    <AntDesign name="close" padding={10} size={24} color="white" />
+                    <AntDesign name="close" padding={10} size={36} color="white" />
                 </TouchableOpacity>
                 ),
         });
@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     },
     input: {
-        padding: 2,
-        fontSize: 18,
+        padding: 5,
+        fontSize: 24,
     },
     headerButton: {
         color: "#fff",

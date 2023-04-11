@@ -29,7 +29,7 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
     navigation.setOptions({
         headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
-            <AntDesign name="back" size={24} padding={10} color="white" />
+            <AntDesign name="back" size={36} padding={10} color="white" />
         </TouchableOpacity>
         ),
         headerRight: () => (
@@ -37,7 +37,7 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
             deletePrintData(item);
             navigation.navigate("Start Screen");
           }}>
-              <AntDesign name="delete" size={24} color="white" />
+              <AntDesign name="delete" size={36} color="white" />
           </TouchableOpacity>
           ),
     });
