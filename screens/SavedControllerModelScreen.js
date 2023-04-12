@@ -7,6 +7,9 @@ import {
   View,
 } from "react-native";
 
+import * as Print from 'expo-print';
+import { shareAsync } from 'expo-sharing';
+
 import React, { useEffect, useRef, useState } from "react";
 
 import Toast from 'react-native-root-toast';
@@ -21,9 +24,41 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
 
   const models = route.params.item.models;
   const item = route.params.item;
-  console.log("setting printData with: ", models);
+  //console.log("setting printData with: ", models);
 
   //console.log("setting controller data ", controllerInfo);
+
+  const objectToHTML = (ports, type) =>{
+    //console.log('ports:', ports);
+    if(ports == null){
+      return "";
+    }
+    var html = '<table style="width:100%"><tr><th>Port</th><th>Models</th></tr>';
+    Object.keys(ports).map((key,i)=>{
+      html += `<tr><td> ${type} Port${ports[key].port}</td><td>`
+      //console.log('oneKey:',ports[key]);
+      //for (let i = 0; i < ports[key].models.length; i++) {
+      //  console.log(ports[key].models[i].name);
+      //  html += `<th>${ports[key].models[i].name}</th>`
+      if(ports[key].models != null){
+      Object.keys(ports[key].models).map((twoKey,j)=>{
+        console.log('modelname:',ports[key].models[twoKey].name);
+        html += `${ports[key].models[twoKey].name},`
+      })}
+      //}
+
+    html += "</td></tr>"
+    })
+    html += "</table>"
+    return html;
+  }
+
+  const printToFile = async (html) => {
+    // On iOS/android prints the given html. On web prints the HTML from the current page.
+    const { uri } = await Print.printToFileAsync({ html });
+    console.log('File has been saved to:', uri);
+    await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
+  };
 
   useEffect(() => {
     navigation.setOptions({
@@ -33,13 +68,35 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
         </TouchableOpacity>
         ),
         headerRight: () => (
-          <TouchableOpacity onPress={() => {
+        
+          <View style={{flexDirection: "row"}}>
+           <TouchableOpacity style={{padding: 10}} onPress={() => {
+            var html = objectToHTML(models.pixelports, "Pixel");
+            html += objectToHTML(models.serialports, "Serial");
+             html += objectToHTML(models.ledpanelmatrixports, "Panel");
+             html += objectToHTML(models.virtualmatrixports, "VR Matrix");
+            printToFile(html);
+
+          }}>
+             <AntDesign name="printer" size={36} color="white" />
+         </TouchableOpacity>
+         <TouchableOpacity style={{padding: 10}} onPress={() => {
             deletePrintData(item);
             navigation.navigate("Start Screen");
           }}>
-              <AntDesign name="delete" size={36} color="white" />
-          </TouchableOpacity>
-          ),
+             <AntDesign name="delete" size={36} color="white" />
+         </TouchableOpacity>
+          </View>
+        )  ,
+       // headerRight: () => (
+        //  <TouchableOpacity onPress={() => {
+       //     deletePrintData(item);
+       //     navigation.navigate("Start Screen");
+        //  }}>
+        //      <AntDesign name="delete" size={36} color="white" />
+        //  </TouchableOpacity>
+        //  )
+
     });
     });
 
@@ -58,7 +115,7 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
   const renderPixelPort = ({ index, item }) => {
       return (
           <View  style={styles.resultsRow} >
-              <Text>Pixel Port {item.port}: </Text>  
+              <Text style={styles.resultsLabelText}>Pixel Port {item.port}: </Text>  
                             <FlatList
                   data={item.models}
                   renderItem={renderModels}
@@ -69,7 +126,7 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
       const renderSerialPort = ({ index, item }) => {
         return (
             <View  style={styles.resultsRow} >
-                <Text>Serial Port {item.port}: </Text>  
+                <Text style={styles.resultsLabelText}>Serial Port {item.port}: </Text>  
                               <FlatList
                     data={item.models}
                     renderItem={renderModels}
@@ -81,7 +138,7 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
         const renderMatrix = ({ index, item }) => {
           return (
               <View  style={styles.resultsRow} >
-                  <Text>Matrix Port {item.port}: </Text>  
+                  <Text style={styles.resultsLabelText}>Matrix Port {item.port}: </Text>  
                                 <FlatList
                       data={item.models}
                       renderItem={renderModels}
@@ -92,7 +149,7 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
     const renderModels = ({ index, item }) => {
         return (            
             <View >
-                <Text>{item.name} {item.smartremote}</Text>               
+                <Text style={styles.resultsLabelText}>{item.name} {item.smartremote}</Text>               
             </View>  
         );
         };

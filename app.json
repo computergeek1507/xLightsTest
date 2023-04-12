@@ -33,6 +33,12 @@
         "projectId": "a9edab8a-fa09-437b-bf73-3ae4f6b30d79"
       }
     },
-    "owner": "computergeek1507"
+    "owner": "computergeek1507",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/a9edab8a-fa09-437b-bf73-3ae4f6b30d79"
+    }
   }
 }

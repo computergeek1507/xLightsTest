@@ -67,7 +67,7 @@ const ControllerModelScreen = ({ route, navigation }) => {
   const renderPixelPort = ({ index, item }) => {
       return (
           <View  style={styles.resultsRow} >
-              <Text>Pixel Port {item.port}: </Text>  
+              <Text style={styles.resultsLabelText}>Pixel Port {item.port}: </Text>  
                             <FlatList
                   data={item.models}
                   renderItem={renderModels}
@@ -78,7 +78,7 @@ const ControllerModelScreen = ({ route, navigation }) => {
       const renderSerialPort = ({ index, item }) => {
         return (
             <View  style={styles.resultsRow} >
-                <Text>Serial Port {item.port}: </Text>  
+                <Text style={styles.resultsLabelText}>Serial Port {item.port}: </Text>  
                               <FlatList
                     data={item.models}
                     renderItem={renderModels}
@@ -90,7 +90,7 @@ const ControllerModelScreen = ({ route, navigation }) => {
         const renderMatrix = ({ index, item }) => {
           return (
               <View  style={styles.resultsRow} >
-                  <Text>Matrix Port {item.port}: </Text>  
+                  <Text style={styles.resultsLabelText}>Matrix Port {item.port}: </Text>  
                                 <FlatList
                       data={item.models}
                       renderItem={renderModels}
@@ -101,7 +101,7 @@ const ControllerModelScreen = ({ route, navigation }) => {
     const renderModels = ({ index, item }) => {
         return (            
             <View >
-                <Text>{item.name} {item.smartremote}</Text>               
+                <Text style={styles.resultsLabelText}>{item.name} {item.smartremote}</Text>               
             </View>  
         );
         };
