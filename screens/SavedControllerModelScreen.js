@@ -42,7 +42,7 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
       //  html += `<th>${ports[key].models[i].name}</th>`
       if(ports[key].models != null){
       Object.keys(ports[key].models).map((twoKey,j)=>{
-        console.log('modelname:',ports[key].models[twoKey].name);
+        //console.log('modelname:',ports[key].models[twoKey].name);
         html += `${ports[key].models[twoKey].name},`
       })}
       //}
