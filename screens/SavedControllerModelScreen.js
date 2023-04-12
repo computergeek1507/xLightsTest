@@ -24,9 +24,6 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
 
   const models = route.params.item.models;
   const item = route.params.item;
-  //console.log("setting printData with: ", models);
-
-  //console.log("setting controller data ", controllerInfo);
 
   const objectToHTML = (ports, type) =>{
     //console.log('ports:', ports);
@@ -36,18 +33,11 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
     var html = '<table style="width:100%"><tr><th>Port</th><th>Models</th></tr>';
     Object.keys(ports).map((key,i)=>{
       html += `<tr><td> ${type} Port${ports[key].port}</td><td>`
-      //console.log('oneKey:',ports[key]);
-      //for (let i = 0; i < ports[key].models.length; i++) {
-      //  console.log(ports[key].models[i].name);
-      //  html += `<th>${ports[key].models[i].name}</th>`
       if(ports[key].models != null){
       Object.keys(ports[key].models).map((twoKey,j)=>{
-        //console.log('modelname:',ports[key].models[twoKey].name);
         html += `${ports[key].models[twoKey].name},`
       })}
-      //}
-
-    html += "</td></tr>"
+      html += "</td></tr>"
     })
     html += "</table>"
     return html;
@@ -62,6 +52,7 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
 
   useEffect(() => {
     navigation.setOptions({
+      title: item.name,
         headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
             <AntDesign name="back" size={36} padding={10} color="white" />
@@ -71,7 +62,8 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
         
           <View style={{flexDirection: "row"}}>
            <TouchableOpacity style={{padding: 10}} onPress={() => {
-            var html = objectToHTML(models.pixelports, "Pixel");
+            var html = `<h3>${item.name}<\h3>`; 
+            html += objectToHTML(models.pixelports, "Pixel");
             html += objectToHTML(models.serialports, "Serial");
              html += objectToHTML(models.ledpanelmatrixports, "Panel");
              html += objectToHTML(models.virtualmatrixports, "VR Matrix");
@@ -99,7 +91,6 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
 
     });
     });
-
 
     const renderSeparator = ({ index, item }) => {
       return (

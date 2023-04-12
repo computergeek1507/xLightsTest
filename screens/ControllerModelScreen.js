@@ -28,6 +28,7 @@ const ControllerModelScreen = ({ route, navigation }) => {
 
   useEffect(() => {
     navigation.setOptions({
+        title: controllerInfo.name,
         headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.navigate("Controller Info",{"item":controllerInfo})}>
             <AntDesign name="back" size={36} padding={10} color="white" />
