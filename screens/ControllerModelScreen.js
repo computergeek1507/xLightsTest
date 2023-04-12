@@ -35,7 +35,7 @@ const ControllerModelScreen = ({ route, navigation }) => {
         </TouchableOpacity>
         ),
         headerRight: () => (
-          <TouchableOpacity onPress={() => storePrintItem({name :controllerInfo.ip,models:models})}>
+          <TouchableOpacity onPress={() => storePrintItem({name : controllerInfo.name, models:models})}>
               <AntDesign name="addfile" size={36} padding={10} color="white" />
           </TouchableOpacity>
           ),
