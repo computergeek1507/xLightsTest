@@ -6,6 +6,8 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
+import * as Analytics from "expo-firebase-analytics";
+
 import StartScreen from "./screens/StartScreen";
 import ModelScreen from "./screens/ModelScreen";
 import ControllerScreen from "./screens/ControllerScreen";
@@ -16,14 +18,34 @@ import ControllerModelScreen from "./screens/ControllerModelScreen";
 import SavedControllerModelScreen from "./screens/SavedControllerModelScreen";
 import SettingScreen from "./screens/SettingScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import React from "react";
+import React,{useRef} from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const navigationRef = useRef();
+  const routeNameRef = useRef();
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      ref={navigationRef}
+      onReady={() =>
+        (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
+      }
+      onStateChange={ async () => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = navigationRef.current.getCurrentRoute().name;
+        if (previousRouteName !== currentRouteName) {
+          await Analytics.logEvent("screen_view", {
+            screen_name: currentRouteName,
+            screen_class: currentRouteName,
+          });
+          console.log('Logging Screen: ', currentRouteName);
+        }
+        // Save the current route name for later comparison
+        routeNameRef.current = currentRouteName;
+      }}
+    >
       <Stack.Navigator screenOptions={navStyling}>
         <Stack.Screen name="Start Screen" component={StartScreen} />
         <Stack.Screen name="Models" component={ModelScreen} />

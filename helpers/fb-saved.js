@@ -2,9 +2,14 @@ import { getDatabase, onValue, push, ref, remove, set } from "firebase/database"
 
 import { firebaseConfig } from "./fb-credentials";
 import { initializeApp } from "firebase/app";
+//import { getAnalytics, logEvent } from "firebase/analytics";
+
 
 export function initSavedDB() {
-  initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
+  //const analytics = getAnalytics(app);
+  //logEvent(analytics, 'started');
+  //Analytics.logEvent("login");
 }   
 
 // export function writeData(key, data) {

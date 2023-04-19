@@ -102,7 +102,7 @@ const ControllerModelScreen = ({ route, navigation }) => {
     const renderModels = ({ index, item }) => {
         return (            
             <View >
-                <Text style={styles.resultsLabelText}>{item.name} {item.smartremote}</Text>               
+                <Text style={styles.resultsLabelText}>{item.name} {String.fromCharCode(item.smartremote)}</Text>               
             </View>  
         );
         };
@@ -127,7 +127,7 @@ const ControllerModelScreen = ({ route, navigation }) => {
       ItemSeparatorComponent={renderSeparator}
       renderItem={renderMatrix}
     /><FlatList
-    data={models.virtualmatrixports}
+    data={models.virtualmatrixports}accessibilityLabel=''
     //keyExtractor={item => item.name}
     ItemSeparatorComponent={renderSeparator}
     renderItem={renderMatrix}

@@ -2,7 +2,7 @@
   "expo": {
     "name": "xLightsTest",
     "slug": "xlightstest",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -16,17 +16,33 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.computergeek1507.xlightstest"
+      "bundleIdentifier": "com.computergeek1507.xlightstest",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.computergeek1507.xlightstest"
+      "versionCode": 3,
+      "versionName": "1.0.1",
+      "package": "com.computergeek1507.xlightstest",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "config": {
+        "firebase": {
+          "apiKey": "AIzaSyBSHot5dt1_gsoSIcWVnpUPqjAbMIrzbPs",
+          "authDomain": "my-project-1535595066839.firebaseapp.com",
+          "databaseURL": "https://my-project-1535595066839-default-rtdb.firebaseio.com",
+          "projectId": "my-project-1535595066839",
+          "storageBucket": "my-project-1535595066839.appspot.com",
+          "messagingSenderId": "972061166742",
+          "appId": "1:972061166742:web:35f71398f4b1430b3d46b7",
+          "measurementId": "G-N78KCQ5GK9"
+        }
+      }
     },
     "extra": {
       "eas": {

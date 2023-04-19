@@ -140,7 +140,7 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
     const renderModels = ({ index, item }) => {
         return (            
             <View >
-                <Text style={styles.resultsLabelText}>{item.name} {item.smartremote}</Text>               
+                <Text style={styles.resultsLabelText}>{item.name} {String.fromCharCode(item.smartremote)}</Text>               
             </View>  
         );
         };
