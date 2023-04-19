@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "972061166742",
+    "firebase_url": "https://my-project-1535595066839-default-rtdb.firebaseio.com",
+    "project_id": "my-project-1535595066839",
+    "storage_bucket": "my-project-1535595066839.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972061166742:android:3da9d2211024415e3d46b7",
+        "android_client_info": {
+          "package_name": "com.computergeek1507.xlightstest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972061166742-e561ucld0qmj7ji7g6vti8rsq3ta429h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZe0mBPg2ectH9EBxKg3d0jlKzjB7oeiE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "972061166742-e561ucld0qmj7ji7g6vti8rsq3ta429h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "972061166742-s7o8hu3ki2rdjd7q1ob1pekaepjqfa5t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.computergeek1507.xlightstest"
+              }
+            }
+          ]
+        }
+      }
+    }    
+  ],
+  "configuration_version": "1"
+}
