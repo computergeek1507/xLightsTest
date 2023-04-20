@@ -79,7 +79,7 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
              <AntDesign name="delete" size={36} color="white" />
          </TouchableOpacity>
           </View>
-        )  ,
+        ),
        // headerRight: () => (
         //  <TouchableOpacity onPress={() => {
        //     deletePrintData(item);

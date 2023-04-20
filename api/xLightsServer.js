@@ -70,7 +70,7 @@ export const getModel = async (values, callback) => {
     const response = await xLightsServer.get(
         `/getModel?model=${values}`
         );
-        console.log("received: ", response.data);
+        //console.log("received: ", response.data);
         callback(response.data);  
         };
 

@@ -7,7 +7,7 @@ import {
     View
 } from "react-native";
 
-import React, {useEffect,useState} from "react";
+import React, {useEffect, useState} from "react";
 import { AntDesign } from '@expo/vector-icons'; 
 import { getModels} from '../api/xLightsServer';
 

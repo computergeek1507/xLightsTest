@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "versionCode": 3,
+      "versionCode": 4,
       "versionName": "1.0.1",
       "package": "com.computergeek1507.xlightstest",
       "googleServicesFile": "./google-services.json"
@@ -55,6 +55,14 @@
     },
     "updates": {
       "url": "https://u.expo.dev/a9edab8a-fa09-437b-bf73-3ae4f6b30d79"
-    }
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
+        }
+      ]
+    ]
   }
 }

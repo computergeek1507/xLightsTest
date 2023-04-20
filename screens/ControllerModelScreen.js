@@ -7,6 +7,9 @@ import {
   View,
 } from "react-native";
 
+import * as Print from 'expo-print';
+import { shareAsync } from 'expo-sharing';
+
 import React, { useEffect, useRef, useState } from "react";
 
 import { getModelsOnController} from '../api/xLightsServer';
@@ -26,6 +29,31 @@ const ControllerModelScreen = ({ route, navigation }) => {
 
   //console.log("setting controller data ", controllerInfo);
 
+  const objectToHTML = (ports, type) =>{
+    //console.log('ports:', ports);
+    if(ports == null){
+      return "";
+    }
+    var html = '<table style="width:100%"><tr><th>Port</th><th>Models</th></tr>';
+    Object.keys(ports).map((key,i)=>{
+      html += `<tr><td> ${type} Port${ports[key].port}</td><td>`
+      if(ports[key].models != null){
+      Object.keys(ports[key].models).map((twoKey,j)=>{
+        html += `${ports[key].models[twoKey].name},`
+      })}
+      html += "</td></tr>"
+    })
+    html += "</table>"
+    return html;
+  }
+
+  const printToFile = async (html) => {
+    // On iOS/android prints the given html. On web prints the HTML from the current page.
+    const { uri } = await Print.printToFileAsync({ html });
+    console.log('File has been saved to:', uri);
+    await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
+  };
+
   useEffect(() => {
     navigation.setOptions({
         title: controllerInfo.name,
@@ -35,10 +63,24 @@ const ControllerModelScreen = ({ route, navigation }) => {
         </TouchableOpacity>
         ),
         headerRight: () => (
-          <TouchableOpacity onPress={() => storePrintItem({name : controllerInfo.name, models:models})}>
+        
+          <View style={{flexDirection: "row"}}>
+           <TouchableOpacity style={{padding: 10}} onPress={() => {
+            var html = `<h3>${controllerInfo.name}<\h3>`; 
+            html += objectToHTML(models.pixelports, "Pixel");
+            html += objectToHTML(models.serialports, "Serial");
+             html += objectToHTML(models.ledpanelmatrixports, "Panel");
+             html += objectToHTML(models.virtualmatrixports, "VR Matrix");
+            printToFile(html);
+
+          }}>
+             <AntDesign name="printer" size={36} color="white" />
+         </TouchableOpacity>
+         <TouchableOpacity onPress={() => storePrintItem({name : controllerInfo.name, models:models})}>
               <AntDesign name="addfile" size={36} padding={10} color="white" />
           </TouchableOpacity>
-          ),
+          </View>
+        )
         //headerRight: () => (
         //  <TouchableOpacity onPress={() => navigation.navigate("Controllers")}>
         //      <Text style={styles.headerButton}>Controllers</Text>

@@ -12,6 +12,8 @@ import {
   Linking,
 } from "react-native";
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import React, { useEffect, useRef, useState } from "react";
 
 import { AntDesign } from '@expo/vector-icons'; 
@@ -27,6 +29,7 @@ const ModelInfoScreen = ({ route, navigation }) => {
     const modelData = route.params.item;
     const [modelParm, setModelParm] = useState([]);
     //console.log("setting model data ", modelData);
+    const [imageUri, setImageUri] = useState(null);
 
     useEffect(() => {
         navigation.setOptions({
@@ -44,13 +47,29 @@ const ModelInfoScreen = ({ route, navigation }) => {
         });
     });
 
-    useEffect(() => {
+    const getData = async (callback) => {
+      try {
+        const value = await AsyncStorage.getItem(`@${modelData}_pict`)
+        if(value !== null) {
+          // value previously stored
+          callback(value);  
+        }
+      } catch(e) {
+        // error reading value
+      }
+    }
 
+    useEffect(() => {
       getModel(modelData, (data) => {
         setModelParm(data);
-        console.log("setting data ", data);
+        //console.log("setting data ", data);
         });
+        getData(setImageUri);
     }, []);
+
+    useEffect(() => {
+        getData(setImageUri);
+    });
 
 return (
     <TouchableWithoutFeedback>
@@ -60,6 +79,19 @@ return (
         ? <ModelDisplay model = {modelParm}/>
         : <ModelGroupDisplay model = {modelParm}/>
       }
+       <View style={styles.countContainer}>
+        <TouchableOpacity style={modelParm.models != null ? styles.buttonDisable :styles.button} 
+             disabled={modelParm.models != null} 
+        onPress={() =>
+                 navigation.navigate("Camera Screen", { modelData })}>
+            <Text style={styles.buttonText}>Take Picture</Text>
+        </TouchableOpacity>
+        </View>
+        {imageUri && 
+  
+        <Image source={{ uri: imageUri }} style={{ flex: 1 }} />
+
+        }
       </View>
     </TouchableWithoutFeedback>
   );
@@ -71,7 +103,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#E8EAF6",
     flex: 1,
   },
-  buttons: {
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#a40000',
+    padding: 10,
+  },
+  buttonDisable: {
+    alignItems: 'center',
+    backgroundColor: '#a40000',
+    padding: 10,
+    opacity: 0.4
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  countContainer: {
+    //alignItems: 'center',
     padding: 10,
   },
   headerButton: {
