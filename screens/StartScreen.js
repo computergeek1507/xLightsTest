@@ -28,6 +28,7 @@ const StartScreen = ({ route, navigation }) => {
     const [xLightsVersion, setxLightsVersion] = useState("");
     const [showFolder, setShowFolder] = useState("");
     const [offline, setOffline] = useState(true);
+    const [tooOld, setTooOld] = useState(false);
     const [printData, setPrintData] = useState([]);
 
     useEffect(() => {
@@ -48,17 +49,27 @@ const StartScreen = ({ route, navigation }) => {
       const loadData = () => {
         getVersion((data) => {
           setOffline(false);
-          //console.log("setting state with: ", items);
+          
+          //console.log("setting state with: ", data);
           setxLightsVersion(data);
+          //VersionCheck(data);
+          getShowFolder((data) => {
+            //console.log("setting state with: ", data);
+            setShowFolder(data);
+            setTooOld(false);
+          },
+          (data) => {
+            setTooOld(true);
+            //setxLightsVersion("");
+            setShowFolder("");
+          });
+
         },(data) => {
           setOffline(true);
           setxLightsVersion("");
           setShowFolder("");
         });
-        getShowFolder((data) => {
-          //console.log("setting state with: ", data);
-          setShowFolder(data);
-        });
+        
     };
 
       useEffect(() => {
@@ -110,8 +121,11 @@ return (
         </View>
         <View>
         { offline && 
-  <Text style={styles.inputError}>Failed to Connect to xLights, Check IP Address Settings</Text>
-}
+          <Text style={styles.inputError}>Failed to Connect to xLights, Check IP Address Settings</Text>
+        }
+        { tooOld && 
+          <Text style={styles.inputError}>Please Update xLights to 2023.06 to use this App</Text>
+        }
         <Text>Show Folder: {showFolder}</Text>
         <Text>xLights Version: {xLightsVersion}</Text>
         </View>

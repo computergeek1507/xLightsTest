@@ -39,7 +39,7 @@ const CameraScreen = ({ route, navigation }) => {
       const takePicture = async () => {
         if (camera) {
           const data = await camera.takePictureAsync();
-          console.log(data.uri);
+          //console.log(data.uri);
           storeData(data.uri);
             navigation.navigate("Model Info", { item : modelData });
           //setImageUri(data.uri);
@@ -55,6 +55,7 @@ const CameraScreen = ({ route, navigation }) => {
           <Camera 
           ref={(ref) => setCamera(ref)}
           style={styles.camera} 
+          ratio="16:9"
           type={type}>
             <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={takePicture}>

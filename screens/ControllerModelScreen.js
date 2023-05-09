@@ -34,12 +34,15 @@ const ControllerModelScreen = ({ route, navigation }) => {
     if(ports == null){
       return "";
     }
+    if(ports.length == 0){
+      return "";
+    }
     var html = '<table style="width:100%"><tr><th>Port</th><th>Models</th></tr>';
     Object.keys(ports).map((key,i)=>{
       html += `<tr><td> ${type} Port${ports[key].port}</td><td>`
       if(ports[key].models != null){
       Object.keys(ports[key].models).map((twoKey,j)=>{
-        html += `${ports[key].models[twoKey].name},`
+        html += `${ports[key].models[twoKey].name}, `
       })}
       html += "</td></tr>"
     })

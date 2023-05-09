@@ -30,7 +30,7 @@ export const getVersion = async (callback, failcallback) => {
     }
 };
 
-export const getShowFolder = async (callback) => {
+export const getShowFolder = async (callback, failcallback) => {
     try {
         const response = await xLightsServer.get(
             `/getShowFolder`
@@ -38,7 +38,7 @@ export const getShowFolder = async (callback) => {
             //console.log("received: ", response.data);
             callback(response.data);  
         } catch (err) {
-
+            failcallback(err)
         }
  };
 

@@ -68,7 +68,7 @@ const SettingScreen = ({ route, navigation }) => {
               // error reading value
             }
           }
-
+ 
     return (
        <View>
         <View style={styles.textHeader}>
