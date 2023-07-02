@@ -40,7 +40,7 @@ const ModelScreen = ({ route, navigation }) => {
             <View
                 style={{
                     backgroundColor: 'black',
-                    height: 0.5,
+                    height: 1.0,
                 }}
             />
         );

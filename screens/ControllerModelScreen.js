@@ -10,16 +10,14 @@ import {
 import * as Print from 'expo-print';
 import { shareAsync } from 'expo-sharing';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import React, { useEffect, useRef, useState } from "react";
 
 import { getModelsOnController} from '../api/xLightsServer';
 import Toast from 'react-native-root-toast';
 
 import { AntDesign } from '@expo/vector-icons'; 
-
-import {
-  storePrintItem
-} from "../helpers/fb-saved";
 
 const ControllerModelScreen = ({ route, navigation }) => {
 
@@ -48,6 +46,29 @@ const ControllerModelScreen = ({ route, navigation }) => {
     })
     html += "</table>"
     return html;
+  }
+
+  const storeData = async (name, value) => {
+    try {
+      //console.log("TEST: ", name);
+      var conNames = [];
+     // console.log("TEST: ", value);
+      const arr = await (AsyncStorage.getItem("storedControllers"));
+      if (arr !== null) {
+        // value previously stored
+        conNames = JSON.parse(arr);
+      }
+
+      conNames.push(name)
+      //console.log("getting printData with: ", conNames);
+      conNames = [...new Set(conNames)];
+      //console.log("getting printData with: ", conNames);
+      AsyncStorage.setItem('storedControllers', JSON.stringify(conNames));
+      AsyncStorage.setItem(`@${name}_models`, JSON.stringify(value));
+    } catch (e) {
+      // saving error
+      console.log(e);
+    }
   }
 
   const printToFile = async (html) => {
@@ -79,7 +100,7 @@ const ControllerModelScreen = ({ route, navigation }) => {
           }}>
              <AntDesign name="printer" size={36} color="white" />
          </TouchableOpacity>
-         <TouchableOpacity onPress={() => storePrintItem({name : controllerInfo.name, models:models})}>
+         <TouchableOpacity onPress={() => {storeData(controllerInfo.name, models)}}>
               <AntDesign name="addfile" size={36} padding={10} color="white" />
           </TouchableOpacity>
           </View>

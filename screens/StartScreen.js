@@ -16,20 +16,12 @@ import { Feather } from "@expo/vector-icons";
 
 import { getVersion, getShowFolder} from '../api/xLightsServer';
 
-import {
-  initSavedDB,
-  setupPrintListener,
-  storePrintItem,
-  deletePrintData
-} from "../helpers/fb-saved";
-
 const StartScreen = ({ route, navigation }) => {
 
     const [xLightsVersion, setxLightsVersion] = useState("");
     const [showFolder, setShowFolder] = useState("");
     const [offline, setOffline] = useState(true);
     const [tooOld, setTooOld] = useState(false);
-    const [printData, setPrintData] = useState([]);
 
     useEffect(() => {
         navigation.setOptions({
@@ -73,19 +65,6 @@ const StartScreen = ({ route, navigation }) => {
     };
 
       useEffect(() => {
-        try {
-          initSavedDB();
-        } catch (err) {
-          console.log(err);
-        }
-        setupPrintListener((items) => {
-          //console.log("setting state with: ", items);
-          setPrintData(items);
-        });
-        loadData();
-      }, []);
-
-      useEffect(() => {
         //console.log("route.params ", route.params);
         //if (route?.params?.ip) {
           //console.log("route.params ", route.params);
@@ -115,7 +94,7 @@ return (
         <View style={styles.countContainer}>
           <TouchableOpacity style={styles.button} 
            onPress={() =>
-                  navigation.navigate("Saved Wiring Lists",{printData})}>
+                  navigation.navigate("Saved Wiring Lists")}>
               <Text style={styles.buttonText}>Saved Wiring Lists</Text>
           </TouchableOpacity>          
         </View>

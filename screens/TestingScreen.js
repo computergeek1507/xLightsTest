@@ -1,4 +1,5 @@
 import {
+    Alert,
     FlatList,
     StyleSheet,
     Text,
@@ -7,13 +8,47 @@ import {
     View
 } from "react-native";
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import React, {useEffect,useState} from "react";
 
 import { AntDesign } from '@expo/vector-icons'; 
 
 const TestingScreen = ({ route, navigation }) => {
-    const { printData } = route.params;
-    //console.log("setting printData with: ", route.params);
+    const [ printData, setPrintData ] = useState([]);
+    //console.log("setting printData with: ", printData);
+
+   const getControllers = async (callback) => {
+      try {
+        var conNames = [];
+        const value = await AsyncStorage.getItem("storedControllers");
+        if(value !== null) {
+          // value previously stored
+          conNames = JSON.parse(value);
+          
+        }
+        callback(conNames);  
+      } catch(e) {
+        console.log(e);
+      }
+    }
+
+    useEffect(() => {
+      getControllers((data) => {
+        setPrintData(data);
+        });
+    });
+
+    useEffect(() =>{
+      const focusHandler = navigation.addListener('focus', () => {
+        //Alert.alert('Refreshed');
+        getControllers((data) => {
+          setPrintData(data);
+          });
+    });
+    return focusHandler;
+  }, [navigation]);
+
     useEffect(() => {
         navigation.setOptions({
             headerLeft: () => (
@@ -42,7 +77,7 @@ const TestingScreen = ({ route, navigation }) => {
                     navigation.navigate("Saved Controller Models", { item });
                     }}>
                 <View  style={styles.resultsRow} >
-                    <Text>Controller: {item.name}</Text>  
+                    <Text>Controller: {item}</Text>  
                 </View>
                 </TouchableHighlight>
             );

@@ -10,20 +10,60 @@ import {
 import * as Print from 'expo-print';
 import { shareAsync } from 'expo-sharing';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import React, { useEffect, useRef, useState } from "react";
 
 import Toast from 'react-native-root-toast';
 
 import { AntDesign } from '@expo/vector-icons'; 
 
-import {
-    deletePrintData
-} from "../helpers/fb-saved";
-
 const SavedControllerModelScreen = ({ route, navigation }) => {
 
-  const models = route.params.item.models;
+  //const models = route.params.item.models;
+  const [models, setModels] = useState([]);
   const item = route.params.item;
+
+  const getControllers = async (name, callback) => {
+    try {
+      var conNames = [];
+      console.log("item data ", name);
+      const value = await AsyncStorage.getItem(`@${name}_models`);
+      //console.log("item data ", value);
+      if(value !== null) {
+        // value previously stored
+        conNames = JSON.parse(value);
+        callback(conNames);  
+      }
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
+  const deleteControllers = async (name) => {
+    try {
+      var conNames = [];
+
+      console.log("TEST: ", name);
+      const arr = await (AsyncStorage.getItem("storedControllers"));
+      if (arr !== null) {
+        // value previously stored
+        conNames = JSON.parse(arr);
+        const index = conNames.indexOf(name);
+        console.log("TEST: ", conNames);
+        console.log("TEST: ", index);
+        var yy = conNames.splice(index, 1);
+        console.log("TEST: ", conNames);
+      }
+      await AsyncStorage.setItem('storedControllers', JSON.stringify(conNames));
+
+      console.log("TEST: ", name);
+      await AsyncStorage.removeItem(`@${name}_models`);
+      //console.log("item data ", value);
+    } catch(e) {
+      console.log(e);
+    }
+  }
 
   const objectToHTML = (ports, type) =>{
     //console.log('ports:', ports);
@@ -57,7 +97,7 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
     navigation.setOptions({
       title: item.name,
         headerLeft: () => (
-        <TouchableOpacity onPress={() => navigation.navigate("Start Screen")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Saved Wiring Lists")}>
             <AntDesign name="back" size={36} padding={10} color="white" />
         </TouchableOpacity>
         ),
@@ -76,8 +116,8 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
              <AntDesign name="printer" size={36} color="white" />
          </TouchableOpacity>
          <TouchableOpacity style={{padding: 10}} onPress={() => {
-            deletePrintData(item);
-            navigation.navigate("Start Screen");
+            deleteControllers(item);
+            navigation.navigate("Saved Wiring Lists");
           }}>
              <AntDesign name="delete" size={36} color="white" />
          </TouchableOpacity>
@@ -94,6 +134,23 @@ const SavedControllerModelScreen = ({ route, navigation }) => {
 
     });
     });
+
+    onFocus = () => {
+      console.log("item data ", item);
+      getControllers(item, (data) => {
+        setModels(data);
+        //console.log("setting data ", data);
+        });
+     }
+
+    useEffect(() => {
+      console.log("item data ", item);
+      getControllers(item, (data) => {
+        setModels(data);
+        //console.log("setting data ", data);
+        });
+
+    }, []);
 
     const renderSeparator = ({ index, item }) => {
       return (
