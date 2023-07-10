@@ -23,7 +23,7 @@ export const getVersion = async (callback, failcallback) => {
     const response = await xLightsServer.get(
         `/getVersion`
         );
-        //console.log("received: ", response.data);
+        console.log("received: ", response.data);
         callback(response.data);  
     } catch (err) {
         failcallback(err)
@@ -82,6 +82,78 @@ export const uploadController = async (values, callback) => {
         console.log("received: ", response.data);
         callback(response.data);  
         };
+
+    export const setModelControllerPort = async (values) => {
+        try {
+            console.log(values);  
+            const response = await xLightsServer.get(
+                `/setModelProperty?model=${values.model}&key=ModelControllerConnectionPort&data=${values.port}`
+                );
+                console.log("received: ", response.data);
+                
+                
+            } catch (err) {
+                failcallback(err)
+                console.log(err);
+            }
+        console.log("sent: ", values);
+    };
+
+    export const setModelController = async (values, callback, failcallback) => {
+        try {
+            const response = await xLightsServer.get(
+                `/setModelProperty?model=${values.model}&key=Controller&data=${values.controller}`
+                );
+                console.log("received: ", response.data);
+                callback(response.data);  
+                
+            } catch (err) {
+                failcallback(err)
+            }
+        console.log("sent: ", values);
+    };
+
+    export const setModelModelChain = async (values, callback, failcallback) => {
+        try {
+            const response = await xLightsServer.get(
+                `/setModelProperty?model=${values.model}&key=ModelChain&data=${values.modelchanin}`
+                );
+                console.log("received: ", response.data);
+                callback(response.data);  
+                
+            } catch (err) {
+                failcallback(err)
+            }
+        console.log("sent: ", values);
+    };
+
+    export const setModelSmartRemote = async (values, callback, failcallback) => {
+        try {
+            const response = await xLightsServer.get(
+                `/setModelProperty?model=${values.model}&key=SmartRemote&data=${values.smartremote}`
+                );
+                console.log("received: ", response.data);
+                callback(response.data);  
+                
+            } catch (err) {
+                failcallback(err)
+            }
+        console.log("sent: ", values);
+    };
+
+    export const setModelSmartRemoteType = async (values, callback, failcallback) => {
+        try {
+            const response = await xLightsServer.get(
+                `/setModelProperty?model=${values.model}&key=SmartRemoteType&data=${values.smartremotetype}`
+                );
+                console.log("received: ", response.data);
+                callback(response.data);  
+                
+            } catch (err) {
+                failcallback(err)
+            }
+        console.log("sent: ", values);
+    };
 
         
 

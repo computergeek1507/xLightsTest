@@ -42,7 +42,7 @@ const StartScreen = ({ route, navigation }) => {
         getVersion((data) => {
           setOffline(false);
           
-          //console.log("setting state with: ", data);
+          console.log("setting state with: ", data);
           setxLightsVersion(data);
           //VersionCheck(data);
           getShowFolder((data) => {

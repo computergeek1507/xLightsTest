@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     },
     input: {
         padding: 5,
-        fontSize: 24,
+        fontSize: 28,
     },
     headerButton: {
         color: "#fff",

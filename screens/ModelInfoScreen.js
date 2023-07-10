@@ -30,6 +30,14 @@ const ModelInfoScreen = ({ route, navigation }) => {
     const [modelParm, setModelParm] = useState([]);
     //console.log("setting model data ", modelData);
 
+    const updateModel = () => {
+      getModel(modelData, (data) => {
+        setModelParm(data);
+        console.log("regetting data ", data);
+        });
+
+    };
+
     useEffect(() => {
         navigation.setOptions({
           title: modelParm.models == null ? "Model Info" : "Model Group Info",
@@ -61,7 +69,7 @@ return (
      
       <View style={styles.container}>
       {modelParm.models == null
-        ? <ModelDisplay model = {modelParm}/>
+        ? <ModelDisplay model = {modelParm} callback = {updateModel}/>
         : <ModelGroupDisplay model = {modelParm}/>
       }
       </View>

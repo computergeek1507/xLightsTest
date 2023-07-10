@@ -2,9 +2,25 @@ import {
     StyleSheet,
     Text,
     View,
+    TouchableOpacity,
   } from "react-native";
-const ModelDisplay = ( {model } ) => {
+
+  import React, { useEffect, useRef, useState } from "react";
+
+  import { setModelControllerPort, setModelController,setModelModelChain,setModelSmartRemote,setModelSmartRemoteType} from '../api/xLightsServer';
+
+  import DialogInput from 'react-native-dialog-input';
+const ModelDisplay = ( {model,callback} ) => {
     //const { modelData } = props;
+    const [isDialogVisible, setIsDialogVisible] = useState(false);
+
+    const sendInput = (inputText) =>{
+      console.log(inputText);
+      setModelControllerPort({model:model.name,port:inputText })
+      setIsDialogVisible(false);
+      callback();
+    };
+
 
 return (
     <View>
@@ -24,7 +40,24 @@ return (
         <Text style={styles.resultsGrid}>Controller: {model.Controller}</Text>
         </View>
         <View>
-        <Text style={styles.resultsGrid}>Controller Port: {model.ControllerConnection?.Port}</Text>
+        <DialogInput isDialogVisible={isDialogVisible}   
+                    message={"Set Controller Port"}
+                    hintInput ={"1-48"}
+                    autoCorrect={false}
+                    keyboardtype='numeric'
+                    initValueTextInput =  {model.ControllerConnection?.Port}
+                    submitInput={ (inputText) => {sendInput(inputText)} }
+                    closeDialog={ () => {setIsDialogVisible(false)}}>
+        </DialogInput>
+        <TouchableOpacity 
+        onPress={() =>{setIsDialogVisible(true)}
+          }>
+            <Text style={styles.resultsGrid}>Controller Port: {model.ControllerConnection?.Port}</Text>
+        </TouchableOpacity>
+        
+        </View>
+        <View>
+        <Text style={styles.resultsGrid}>Model Chain: {model.ModelChain == null ? "Beginning" : model.ModelChain}</Text>
         </View>
         <View>
         <Text style={styles.resultsGrid}>Controller Protocol: {model.ControllerConnection?.Protocol}</Text>

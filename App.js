@@ -15,7 +15,7 @@ import TestingScreen from "./screens/TestingScreen";
 import ControllerModelScreen from "./screens/ControllerModelScreen";
 import SavedControllerModelScreen from "./screens/SavedControllerModelScreen";
 import SettingScreen from "./screens/SettingScreen";
-import CameraScreen from "./screens/CameraScreen";
+//import CameraScreen from "./screens/CameraScreen";
 
 import { NavigationContainer } from "@react-navigation/native";
 import React,{useRef,useEffect} from "react";
@@ -37,7 +37,6 @@ export default function App() {
         <Stack.Screen name="Saved Controller Models" component={SavedControllerModelScreen} />
         <Stack.Screen name="Saved Wiring Lists" component={TestingScreen} />
         <Stack.Screen name="Settings" component={SettingScreen} />
-        <Stack.Screen name="Camera Screen" component={CameraScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
