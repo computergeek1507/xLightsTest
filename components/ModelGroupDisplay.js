@@ -20,8 +20,8 @@ const ModelGroupDisplay = ( {model } ) => {
   
     const renderModel = ({ index, item }) => {
         return (
-            <View  style={styles.resultsRow} >
-                <Text>{item}</Text>  
+            <View >
+                <Text style={styles.resultsGrid} >{item}</Text>  
 
             </View>
         );
@@ -29,25 +29,30 @@ const ModelGroupDisplay = ( {model } ) => {
 
 return (
 <View>
-      <View>
-      <Text style={styles.resultsGrid}>Name: {model.name}</Text>
+      <View style={styles.viewRowTop}>
+      <Text style={styles.resultsGrid}>Name</Text>
+      <Text style={styles.resultsGrid}>{model.name}</Text>
         </View>       
-        <View>
-        <Text style={styles.resultsGrid}>LayoutGroup: {model.LayoutGroup}</Text>
+        <View style={styles.viewRow}>
+        <Text style={styles.resultsGrid}>LayoutGroup</Text>
+        <Text style={styles.resultsGrid}>{model.LayoutGroup}</Text>
         </View>
-        <View>
-        <Text style={styles.resultsGrid}>Layout: {model.layout}</Text>
+        <View style={styles.viewRow}>
+        <Text style={styles.resultsGrid}>Layout</Text>
+        <Text style={styles.resultsGrid}>{model.layout}</Text>
         </View>
-        <View>
-        <Text style={styles.resultsGrid}>Models:</Text>
+        <View style={styles.viewRowBot}>
+        <Text style={styles.resultsGrid}>Models</Text>
         </View>
-        <FlatList style={styles.resultsGrid}
+        <View style={styles.viewRowBotList}>
+        <FlatList 
       data={model.models.split(',')}
       //keyExtractor={item => item.name}
       ItemSeparatorComponent={renderSeparator}
       renderItem={renderModel}
-    />
-        </View>
+     />
+      </View>
+    </View>
   );
 };
 
@@ -62,16 +67,58 @@ const styles = StyleSheet.create({
       padding: 10,
     },
     resultsGrid: {
-      borderColor: "#000",
-      borderWidth: 1,
-      padding: 10,
-    },
-    resultsRow: {
+      // borderColor: "#000",
+       //borderWidth: 1,  
+       fontSize: 16,
+       padding: 10,  
+       flex:.5
+     },
+     resultsRow: {
+       //flexDirection: "row",
+      // borderColor: "#000",
+       //borderBottomWidth: 1,
+       fontSize: 16,
+       padding: 10,
+     },
+     viewRow: {
+       flexDirection: "row",
+       alignItems: 'center',
+       borderColor: "#000",
+       borderLeftWidth: 1,
+       borderRightWidth: 1,
+       borderTopWidth: 0.5,
+        borderBottomWidth: 0.5,
+      // padding: 10,
+     },
+     viewRowTop: {
+       flexDirection: "row",
+       alignItems: 'center',
+       borderColor: "#000",
+       borderLeftWidth: 1,
+       borderRightWidth: 1,
+       borderTopWidth: 1,
+        borderBottomWidth: 0.5,
+      // padding: 10,
+     },
+     viewRowBot: {
+       flexDirection: "row",
+       alignItems: 'center',
+       borderColor: "#000",
+       borderLeftWidth: 1,
+       borderRightWidth: 1,
+       borderTopWidth: 0.5,
+        borderBottomWidth: 3,
+      // padding: 10,
+     },
+     viewRowBotList: {
       flexDirection: "row",
-      paddingLeft: 20,
-      padding: 10,
-     //borderColor: "#000",
-      //borderBottomWidth: 1,
+      alignItems: 'center',
+      borderColor: "#000",
+      borderLeftWidth: 1,
+      borderRightWidth: 1,
+      borderTopWidth: 0.5,
+       borderBottomWidth: 1,
+     // padding: 10,
     },
     resultsLabelContainer: {
       borderRightWidth: 1,

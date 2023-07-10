@@ -53,7 +53,7 @@ const ModelScreen = ({ route, navigation }) => {
                 navigation.navigate("Model Info", { item });
                 }}>
             <View style={styles.controllerButton}>
-                <Text style={styles.mainLabelText}>{item}</Text>                    
+                <Text style= {styles.mainLabelText }>{item}</Text>                    
             </View>
             </TouchableHighlight>
         );
@@ -85,12 +85,16 @@ const styles = StyleSheet.create({
       },
       mainLabelText: {
         //alignItems: 'center',
+        fontSize: 16,
         padding: 10,
       },
-      mainLabelText: {
+      mainLabelTextGroup: {
         //alignItems: 'center',
+        fontSize: 16,
         padding: 10,
-      },
+        color: 'blue',
+      }
+      
 });
 
 export default ModelScreen;

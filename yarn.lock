@@ -8124,24 +8124,6 @@ react-is@^17.0.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-actions-sheet-picker@^0.3.5:
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/react-native-actions-sheet-picker/-/react-native-actions-sheet-picker-0.3.5.tgz#0f4b7407f6a54b14900995df08e0ce7aabbd1de5"
-  integrity sha512-spbPZxvBet9WC9m++G73TULTxoOYwFGmA2FpS8plXbrSaVczOdhXwaIakmlkEALG27CqyUsdoMOiGOwpC/oyNg==
-  dependencies:
-    react-native-actions-sheet "^0.6.1"
-    react-native-gesture-handler "2.2.1"
-
-react-native-actions-sheet@^0.6.1:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/react-native-actions-sheet/-/react-native-actions-sheet-0.6.2.tgz#82b2e67ee6b2b086f7ed5ed8bce7d48bf2200cea"
-  integrity sha512-MKrI3fxjxenAMwcSyI8fHwcG41ed3Jk5QUiH6/CYvuYRCJSdsxyNfC7Hc6TeM2TYz2bwfsaFBPTMdsR8mN0MRA==
-
-react-native-actions-sheet@^0.9.0-alpha.21:
-  version "0.9.0-alpha.21"
-  resolved "https://registry.yarnpkg.com/react-native-actions-sheet/-/react-native-actions-sheet-0.9.0-alpha.21.tgz#3d4bb0a56fa5723151b7b79c9bb82ef26326586f"
-  integrity sha512-ZYaVjQfNUtdUZBh0uVAesjk00WyxJm9siTpADVCb07Qavimiz4npHn3Sm4jR0fyvFEokVqY3FKT4ETzaUDiVSA==
-
 react-native-codegen@^0.71.5:
   version "0.71.5"
   resolved "https://registry.npmjs.org/react-native-codegen/-/react-native-codegen-0.71.5.tgz"
@@ -8159,7 +8141,7 @@ react-native-dialog-input@^1.0.8:
 
 react-native-dropdown-select-list@^2.0.4:
   version "2.0.4"
-  resolved "https://registry.yarnpkg.com/react-native-dropdown-select-list/-/react-native-dropdown-select-list-2.0.4.tgz#bd63d684dd9b840d50e022985f9d0fa69eee1c2a"
+  resolved "https://registry.npmjs.org/react-native-dropdown-select-list/-/react-native-dropdown-select-list-2.0.4.tgz"
   integrity sha512-H7aRhhSHYvl5v+Ufy5CtXhaRHgrRQakWn+IexSFCP/+nUFu5yvwfmtbVEfIszMjr6szPuiabG15trrbswHlmCw==
 
 react-native-elements@^3.4.3:
@@ -8176,21 +8158,10 @@ react-native-elements@^3.4.3:
     react-native-ratings "8.0.4"
     react-native-size-matters "^0.3.1"
 
-react-native-gesture-handler@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.2.1.tgz#672258aa5a40c92a97c736bdde0a8bd6c8c6c692"
-  integrity sha512-P4kAPbSY8VFAjvFNzfePgFsbZEldfEnEfNqOJw6MlpcdXrPGwRbvMqWMVkA9lifdKTZ3XifvAgJ8+R+uEZN0zA==
-  dependencies:
-    "@egjs/hammerjs" "^2.0.17"
-    hoist-non-react-statics "^3.3.0"
-    invariant "^2.2.4"
-    lodash "^4.17.21"
-    prop-types "^15.7.2"
-
-react-native-gesture-handler@~2.9.0:
-  version "2.9.0"
-  resolved "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.9.0.tgz"
-  integrity sha512-a0BcH3Qb1tgVqUutc6d3VuWQkI1AM3+fJx8dkxzZs9t06qA27QgURYFoklpabuWpsUTzuKRpxleykp25E8m7tg==
+react-native-gesture-handler@^2.12.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.12.0.tgz#59ca9d97e4c71f70b9c258f14a1a081f4c689976"
+  integrity sha512-rr+XwVzXAVpY8co25ukvyI38fKCxTQjz7WajeZktl8qUPdh1twnSExgpT47DqDi4n+m+OiJPAnHfZOkqqAQMOg==
   dependencies:
     "@egjs/hammerjs" "^2.0.17"
     hoist-non-react-statics "^3.3.0"
@@ -8205,7 +8176,7 @@ react-native-gradle-plugin@^0.71.17:
 
 react-native-numeric-input@^1.9.1:
   version "1.9.1"
-  resolved "https://registry.yarnpkg.com/react-native-numeric-input/-/react-native-numeric-input-1.9.1.tgz#eff20699a51ecce6cbd1e3682f68dad981d84e35"
+  resolved "https://registry.npmjs.org/react-native-numeric-input/-/react-native-numeric-input-1.9.1.tgz"
   integrity sha512-uJiMjundXHiBcBLHgSqbfSjLdBM+4OBgLJLSsYG5/+XST5XWufsU8eZaEsn1miOkhjj2B7WgshjNX2Qm+4n3kw==
   dependencies:
     prop-types "^15.6.1"
@@ -8213,7 +8184,7 @@ react-native-numeric-input@^1.9.1:
 
 react-native-pixel-perfect@^1.0.1:
   version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-pixel-perfect/-/react-native-pixel-perfect-1.0.2.tgz#8e6dc97e377caa4bd07f9e584ba438d53c0e25e8"
+  resolved "https://registry.npmjs.org/react-native-pixel-perfect/-/react-native-pixel-perfect-1.0.2.tgz"
   integrity sha512-0IvYCNkxuQbQC9q4tI+C3i6o38nbx916p7gBRBWuPxDhKBCuTkVV3VukcfW6vtjRlwQm6kwQcF9OtI+yUBt+YA==
 
 react-native-ratings@8.0.4:
@@ -8269,6 +8240,11 @@ react-native-screens@~3.20.0:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-select-dropdown@^3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-select-dropdown/-/react-native-select-dropdown-3.3.4.tgz#21633ef95e14c2509c9f839b3082e54d7938c2dc"
+  integrity sha512-Ld6BGGgCnbiv7uORAP+KnvDQiqeuqdlasKk9woJH9XtFMD44rwjKwelGzsDxFUM9hIAwZdac4UAFmOmXRaMeRg==
 
 react-native-size-matters@^0.3.1:
   version "0.3.1"
