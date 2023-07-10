@@ -5,20 +5,43 @@ import {
     TouchableOpacity,
   } from "react-native";
 
-  import React, { useEffect, useRef, useState } from "react";
+  import React, { useEffect, useRef, useMemo, useState } from "react";
 
   import { setModelControllerPort, setModelController,setModelModelChain,setModelSmartRemote,setModelSmartRemoteType} from '../api/xLightsServer';
 
   import DialogInput from 'react-native-dialog-input';
+  import { Picker, onOpen } from 'react-native-actions-sheet-picker';
+
+  import { getControllers} from '../api/xLightsServer';
+
 const ModelDisplay = ( {model,callback} ) => {
     //const { modelData } = props;
     const [isDialogVisible, setIsDialogVisible] = useState(false);
 
+    const [selected, setSelected] = React.useState("");
+
+    const [controllers, setControllers] = useState([]);
+
+    useEffect(() => {
+
+        getControllers((data) => {
+            setControllers(data);
+          });
+      }, []);
+
+      const filteredData = useMemo(() => {
+        if (controllers && controllers.length > 0) {
+          return controllers.filter((item) =>
+            item.autolayout
+          );
+        }
+      });
+  
     const sendInput = (inputText) =>{
       console.log(inputText);
-      setModelControllerPort({model:model.name,port:inputText })
+      setModelControllerPort({model:model.name,port:inputText },callback)
       setIsDialogVisible(false);
-      callback();
+      //callback();
     };
 
 
@@ -37,7 +60,31 @@ return (
         <Text style={styles.resultsGrid}>LayoutGroup: {model.LayoutGroup}</Text>
         </View>
         <View>
-        <Text style={styles.resultsGrid}>Controller: {model.Controller}</Text>
+        <TouchableOpacity 
+          onPress={() =>{onOpen('controller');}
+          }>
+          <Text style={styles.resultsGrid}>Controller: {model.Controller}</Text>
+          <Picker
+        id="controller"
+        data={controllers}
+        inputValue={model.Controller}
+        searchable={false}
+        label="Select Controller"
+        setSelected={(inputText) => 
+          {
+            console.log("gggg: ", inputText.name);
+            //const idx = controllers.indexOf(inputText.name);
+            var idx = controllers.findIndex(x => x.name ===inputText.name);
+            console.log("gggg: ", idx);
+            if(idx === "-1")
+              return;
+            idx = idx +2;
+            console.log("gggg: ", idx);
+            setModelController({model:model.name, controller:idx },callback);
+
+          }}
+      />
+        </TouchableOpacity>
         </View>
         <View>
         <DialogInput isDialogVisible={isDialogVisible}   
@@ -50,11 +97,10 @@ return (
                     closeDialog={ () => {setIsDialogVisible(false)}}>
         </DialogInput>
         <TouchableOpacity 
-        onPress={() =>{setIsDialogVisible(true)}
+          onPress={() =>{setIsDialogVisible(true)}
           }>
             <Text style={styles.resultsGrid}>Controller Port: {model.ControllerConnection?.Port}</Text>
-        </TouchableOpacity>
-        
+        </TouchableOpacity>        
         </View>
         <View>
         <Text style={styles.resultsGrid}>Model Chain: {model.ModelChain == null ? "Beginning" : model.ModelChain}</Text>

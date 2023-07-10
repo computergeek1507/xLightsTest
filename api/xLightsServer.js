@@ -83,32 +83,30 @@ export const uploadController = async (values, callback) => {
         callback(response.data);  
         };
 
-    export const setModelControllerPort = async (values) => {
+    export const setModelControllerPort = async (values, callback) => {
         try {
             console.log(values);  
             const response = await xLightsServer.get(
                 `/setModelProperty?model=${values.model}&key=ModelControllerConnectionPort&data=${values.port}`
                 );
                 console.log("received: ", response.data);
-                
+                callback();
                 
             } catch (err) {
-                failcallback(err)
                 console.log(err);
             }
-        console.log("sent: ", values);
+        //console.log("sent: ", values);
     };
 
-    export const setModelController = async (values, callback, failcallback) => {
+    export const setModelController = async (values, callback) => {
         try {
             const response = await xLightsServer.get(
                 `/setModelProperty?model=${values.model}&key=Controller&data=${values.controller}`
                 );
-                console.log("received: ", response.data);
-                callback(response.data);  
+                callback();
                 
             } catch (err) {
-                failcallback(err)
+                console.log(err);
             }
         console.log("sent: ", values);
     };

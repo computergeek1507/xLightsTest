@@ -33,7 +33,7 @@ const ModelInfoScreen = ({ route, navigation }) => {
     const updateModel = () => {
       getModel(modelData, (data) => {
         setModelParm(data);
-        console.log("regetting data ", data);
+        //console.log("regetting data ", data);
         });
 
     };
