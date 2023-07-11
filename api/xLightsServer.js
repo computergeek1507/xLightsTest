@@ -111,6 +111,19 @@ export const uploadController = async (values, callback) => {
         console.log("sent: ", values);
     };
 
+    export const setModelControllerProtocol = async (values, callback) => {
+        try {
+            const response = await xLightsServer.get(
+                `/setModelProperty?model=${values.model}&key=ModelControllerConnectionProtocol&data=${values.protocol}`
+                );
+                callback();
+                
+            } catch (err) {
+                console.log(err);
+            }
+        console.log("sent: ", values);
+    };
+
     export const setModelModelChain = async (values, callback, failcallback) => {
         try {
             const response = await xLightsServer.get(

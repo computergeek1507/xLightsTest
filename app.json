@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "versionCode": 7,
+      "versionCode": 9,
       "versionName": "1.0.3",
       "package": "com.computergeek1507.xlightstest",
       "googleServicesFile": "./google-services.json"

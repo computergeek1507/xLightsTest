@@ -7,7 +7,13 @@ import {
 
   import React, { useEffect, useRef, useMemo, useState } from "react";
 
-  import { setModelControllerPort, setModelController,setModelModelChain,setModelSmartRemote,setModelSmartRemoteType} from '../api/xLightsServer';
+  import { setModelControllerPort, 
+    setModelController,
+    setModelControllerProtocol,
+    setModelModelChain,
+    setModelSmartRemote,
+    setModelSmartRemoteType
+  } from '../api/xLightsServer';
 
   import DialogInput from 'react-native-dialog-input';
   //import { Picker, onOpen } from 'react-native-actions-sheet-picker';
@@ -39,12 +45,42 @@ const ModelDisplay = ( {model,callback} ) => {
     };
 
     const setController = (itemValue, itemIndex) =>{
-      console.log(itemValue);
+      //console.log(itemValue);
       console.log(itemIndex);
-      var idx = itemIndex + 2;
+      var idx = itemIndex;
       console.log(idx);
       setModelController({model:model.name,controller:idx },callback);                  
     };
+    const setProtocol = (itemValue, itemIndex) =>{
+      //console.log(itemValue);
+      console.log(itemIndex);
+      //var idx = itemIndex + 2;
+      //console.log(idx);
+      setModelControllerProtocol({model:model.name,protocol:itemIndex },callback);                  
+    };
+
+    const getProtocols = ( controlName ) => {
+      const isObjectPresent = controllers.find((o) => o.name === controlName);
+      //const isElementPresent = controllers.some((o) => o.name === controlName);
+      //console.log(isObjectPresent);
+      if (isObjectPresent) {                 
+        const arr1 =isObjectPresent.controllercap?.pixelprotocols;
+        const arr2 =isObjectPresent.controllercap?.serialprotocols;
+        return arr1.concat(arr2);
+      }
+      return [];
+  };
+
+  const getAutoControllers = ( ) => {
+    var arr = ["Use Start Channel", "No Controller"];
+    for (var item of controllers) {
+        if(item.autolayout)
+        {
+          arr.push(item.name);
+        }      
+    }
+    return arr;
+};
 
 
 return (
@@ -71,30 +107,31 @@ return (
           </View>
           <View style={{flex:.5}}>
           <SelectDropdown
-              data={controllers}
-              defaultButtonText={model?.Controller}
-              defaultValue={model?.Controller}
+              data={getAutoControllers()}
+              defaultButtonText={model.Controller == null ? "Use Start Channel" : model.Controller}
+              defaultValue={model.Controller == null ? "Use Start Channel" : model.Controller}
               onSelect={setController}
               buttonTextAfterSelection={(selectedItem, index) => {
                 // text represented after item is selected
                 // if data array is an array of objects then return selectedItem.property to render after item is selected
-                return selectedItem.name
+                return selectedItem
               }}
               rowTextForSelection={(item, index) => {
                 // text represented for each item in dropdown
                 // if data array is an array of objects then return item.property to represent item in dropdown
-                return item.name
+                return item
               }}
               
           />
-              </View>
+          </View>
         </View>
         <View style={styles.viewRow}>
         <DialogInput isDialogVisible={isDialogVisible}   
                     message={"Set Controller Port"}
                     hintInput ={"1-48"}
                     autoCorrect={false}
-                    keyboardtype='numeric'
+                    keyboardType='number-pad'
+                    textInputProps={{autoCorrect:false,keyboardType:'number-pad'}} 
                     initValueTextInput =  {model.ControllerConnection?.Port}
                     submitInput={ (inputText) => {sendInput(inputText)} }
                     closeDialog={ () => {setIsDialogVisible(false)}}>
@@ -109,10 +146,32 @@ return (
         <View style={styles.viewRow}>
         <Text style={styles.resultsGrid}>Model Chain</Text>
         <Text style={styles.resultsGrid}>{model.ModelChain == null ? "Beginning" : model.ModelChain}</Text>
+        
         </View>
         <View style={styles.viewRow}>
-        <Text style={styles.resultsGrid}>Controller Protocol</Text>
-        <Text style={styles.resultsGrid}>{model.ControllerConnection?.Protocol}</Text>
+        <View style={{flex:.5}}>
+        <Text style={styles.resultsGridController}>Controller Protocol</Text>
+        </View>
+        <View style={{flex:.5}}>
+        <SelectDropdown
+        
+              data={getProtocols(model?.Controller)}
+              defaultButtonText={model.ControllerConnection?.Protocol}
+              defaultValue={model.ControllerConnection?.Protocol}
+              onSelect={setProtocol}
+              buttonTextAfterSelection={(selectedItem, index) => {
+                // text represented after item is selected
+                // if data array is an array of objects then return selectedItem.property to render after item is selected
+                return selectedItem
+              }}
+              rowTextForSelection={(item, index) => {
+                // text represented for each item in dropdown
+                // if data array is an array of objects then return item.property to represent item in dropdown
+                return item
+              }}
+              
+          />
+          </View>
         </View>
         <View style={styles.viewRowBot}>
         <Text style={styles.resultsGrid}>StringType</Text>
